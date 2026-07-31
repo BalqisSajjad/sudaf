@@ -1,0 +1,137 @@
+/* إعدادات عامة */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Cairo', sans-serif;
+}
+
+body {
+    background-color: #f8f9fa;
+    color: #333;
+    padding-bottom: 70px;
+}
+
+/* شاشة الترحيب */
+.welcome-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #121212;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    text-align: center;
+}
+
+.welcome-content {
+    padding: 20px;
+    max-width: 400px;
+    width: 100%;
+}
+
+.welcome-content h1 {
+    color: #d4af37;
+    font-size: 36px;
+    font-weight: 900;
+    margin-bottom: 5px;
+}
+
+.welcome-content p {
+    color: #aaa;
+    font-size: 14px;
+    margin-bottom: 30px;
+}
+
+.welcome-badge-box {
+    border: 1px solid #d4af37;
+    color: #d4af37;
+    padding: 15px;
+    border-radius: 12px;
+    font-weight: 600;
+    margin-bottom: 25px;
+    background: rgba(212, 175, 55, 0.05);
+}
+
+.start-platform-btn {
+    width: 100%;
+    background: linear-gradient(135deg, #d4af37, #aa8c2c);
+    color: #121212;
+    border: none;
+    padding: 15px;
+    border-radius: 12px;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+}
+
+/* الهيدر العلوي */
+.app-header {
+    background: #fff;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #eee;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo-text h1 {
+    font-size: 20px;
+    color: #d4af37;
+    font-weight: 900;
+}
+
+.logo-text p {
+    font-size: 11px;
+    color: #777;
+}
+
+/* المحتوى الرئيسي */
+.main-content {
+    padding: 20px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.competition-card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    margin-bottom: 20px;
+    border: 1px solid #eaeaea;
+}
+
+/* شريط التنقل السفلي */
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #fff;
+    border-top: 1px solid #eee;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 65px;
+    z-index: 100;
+}
+
+.nav-item {
+    text-decoration: none;
+    color: #777;
+    font-size: 11px;
+    text-align: center;
+}
+
+.nav-item.active {
+    color: #d4af37;
+    font-weight: 700;
+                                }
