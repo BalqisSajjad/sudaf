@@ -1,0 +1,153 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Cairo', sans-serif;
+}
+body {
+    background-color: #f8f9fa;
+    color: #333;
+    padding-bottom: 80px;
+}
+
+/* شاشة الترحيب الأولى */
+.welcome-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background-color: #121212; display: flex; justify-content: center; align-items: center;
+    z-index: 9999; text-align: center; transition: opacity 0.5s ease;
+}
+.welcome-content { padding: 20px; max-width: 400px; width: 100%; }
+.welcome-logo-icon { font-size: 55px; margin-bottom: 10px; }
+.welcome-content h1 { color: #d4af37; font-size: 40px; font-weight: 900; margin-bottom: 5px; }
+.welcome-content p { color: #888; font-size: 14px; margin-bottom: 20px; }
+.welcome-badge-box {
+    border: 1px solid #d4af37; color: #d4af37; padding: 15px; border-radius: 14px;
+    font-weight: 600; margin-bottom: 20px; background: rgba(212, 175, 55, 0.05); font-size: 14px;
+}
+.start-platform-btn {
+    width: 100%; background: linear-gradient(135deg, #d4af37, #aa8c2c); color: #121212;
+    border: none; padding: 15px; border-radius: 14px; font-size: 18px; font-weight: 700;
+    cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 10px;
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3); margin-bottom: 20px;
+}
+.welcome-footer-text { color: #777; font-size: 11px; }
+
+/* نافذة تسجيل الدخول */
+.login-modal-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.85); display: none; justify-content: center; align-items: center;
+    z-index: 8888; padding: 20px;
+}
+.login-card {
+    background: #181818; border: 1px solid rgba(212, 175, 55, 0.4);
+    padding: 30px 20px; border-radius: 20px; width: 100%; max-width: 380px; text-align: right;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+}
+.login-header-icon { font-size: 35px; margin-bottom: 10px; text-align: center; }
+.login-card h2 { color: #d4af37; font-size: 20px; font-weight: 900; margin-bottom: 5px; text-align: center; }
+.login-card p { color: #888; font-size: 12px; margin-bottom: 20px; text-align: center; }
+.input-group { margin-bottom: 12px; }
+.input-group label { display: block; font-size: 11px; color: #aaa; margin-bottom: 5px; }
+.input-group input {
+    width: 100%; padding: 12px 15px; background: #121212; border: 1px solid #333;
+    border-radius: 10px; color: #fff; font-size: 13px; outline: none; text-align: right;
+}
+.input-group input:focus { border-color: #d4af37; }
+.login-submit-btn {
+    width: 100%; background: linear-gradient(135deg, #d4af37, #aa8c2c); color: #121212;
+    border: none; padding: 13px; border-radius: 10px; font-size: 15px; font-weight: 700; cursor: pointer; margin-top: 10px;
+}
+
+/* تصميم القائمة الجانبية (Drawer) من جهة اليمين */
+.side-drawer {
+    position: fixed; top: 0; right: -280px; width: 280px; height: 100%;
+    background: #181818; color: #fff; z-index: 9999; transition: right 0.3s ease;
+    box-shadow: -5px 0 25px rgba(0,0,0,0.5); display: flex; flex-direction: column;
+}
+.side-drawer.open { right: 0; }
+.drawer-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.6); z-index: 9988; display: none;
+}
+.drawer-overlay.open { display: block; }
+.drawer-header { padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #2a2a2a; }
+.drawer-header h3 { font-size: 14px; color: #d4af37; font-weight: 700; }
+.close-drawer { font-size: 24px; cursor: pointer; color: #888; }
+.drawer-user-info { padding: 25px 20px; text-align: center; border-bottom: 1px solid #2a2a2a; background: #121212; }
+.drawer-avatar {
+    width: 65px; height: 65px; background: rgba(212, 175, 55, 0.1); border: 2px solid #d4af37;
+    border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 28px; margin: 0 auto 12px;
+}
+.drawer-user-info h4 { font-size: 16px; color: #fff; margin-bottom: 6px; font-weight: 700; }
+.drawer-user-info p { font-size: 11px; color: #999; line-height: 1.4; }
+.drawer-links { padding: 15px; display: flex; flex-direction: column; gap: 8px; }
+.drawer-link {
+    display: flex; align-items: center; padding: 12px 15px; background: #222; border-radius: 10px;
+    color: #ddd; text-decoration: none; font-size: 13px; font-weight: 600; transition: background 0.2s;
+}
+.drawer-link:hover { background: #2a2a2a; color: #d4af37; }
+.drawer-link.logout { color: #ff5252; margin-top: 15px; }
+
+/* الهيدر العلوي */
+.app-header {
+    background: #ffffff; padding: 12px 16px; display: flex; justify-content: space-between; align-items: center;
+    border-bottom: 1px solid #eaeaea; position: sticky; top: 0; z-index: 100;
+}
+.logo-area { display: flex; align-items: center; gap: 10px; }
+.logo-icon { font-size: 24px; }
+.logo-text h1 { font-size: 18px; color: #d4af37; font-weight: 900; line-height: 1; }
+.logo-text p { font-size: 9px; color: #888; }
+.menu-toggle-btn { background: none; border: none; cursor: pointer; color: #333; }
+
+/* المحتوى */
+.main-content { padding: 16px; max-width: 600px; margin: 0 auto; }
+.section-title-box { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; padding: 0 4px; }
+.section-icon { font-size: 24px; }
+.section-titles h2 { font-size: 17px; font-weight: 900; color: #111; margin-bottom: 2px; }
+.section-titles p { font-size: 11px; color: #666; }
+
+.competition-card {
+    background: #ffffff; border-radius: 16px; overflow: hidden; border: 1px solid #eaeaea; margin-bottom: 16px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+}
+.card-image { position: relative; height: 180px; overflow: hidden; }
+.card-image img { width: 100%; height: 100%; object-fit: cover; }
+.badge {
+    position: absolute; top: 12px; right: 12px; background: rgba(18, 18, 18, 0.85); color: #d4af37;
+    padding: 5px 12px; border-radius: 20px; font-size: 10px; font-weight: 700; border: 1px solid #d4af37;
+}
+.card-body { padding: 16px; }
+.card-body h3 { font-size: 16px; margin-bottom: 6px; color: #111; font-weight: 700; }
+.card-body p { font-size: 12px; color: #555; line-height: 1.6; }
+
+/* النوافذ المنبثقة */
+.modal {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7);
+    display: none; justify-content: center; align-items: center; z-index: 2000; padding: 20px;
+}
+.modal-content { background: #fff; border: 1px solid #ddd; width: 100%; max-width: 420px; border-radius: 16px; padding: 20px; }
+.modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+.modal-header h3 { font-size: 15px; color: #111; }
+.close-btn { font-size: 22px; cursor: pointer; color: #888; }
+.modal-body input, .modal-body textarea {
+    width: 100%; padding: 12px; background: #f9f9f9; border: 1px solid #ddd;
+    border-radius: 10px; margin-bottom: 12px; font-size: 13px; color: #333; outline: none; text-align: right;
+}
+.modal-body textarea { height: 110px; resize: none; }
+#publishBtn {
+    width: 100%; background: #d4af37; color: #121212; border: none; padding: 12px; border-radius: 10px; font-weight: 700; font-size: 15px; cursor: pointer;
+}
+
+/* الشريط السفلي */
+.bottom-nav {
+    position: fixed; bottom: 0; left: 0; width: 100%; background: #ffffff; border-top: 1px solid #eaeaea;
+    display: flex; justify-content: space-around; align-items: center; height: 65px; z-index: 100;
+}
+.nav-item { text-decoration: none; color: #888; font-size: 11px; text-align: center; font-weight: 600; }
+.nav-item.active { color: #d4af37; font-weight: 700; }
+.nav-center-btn-wrapper { position: relative; top: -16px; }
+.center-write-btn {
+    width: 52px; height: 52px; background: linear-gradient(135deg, #d4af37, #aa8c2c); color: #121212;
+    border: none; border-radius: 50%; display: flex; justify-content: center; align-items: center;
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4); cursor: pointer;
+  }
