@@ -1,0 +1,850 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Cairo', sans-serif;
+}
+
+body {
+    background-color: #121212;
+    color: #ffffff;
+    direction: rtl;
+    padding-bottom: 90px;
+}
+
+.app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 15px;
+    background-color: #1a1a1a;
+    border-bottom: 1px solid #2a2a2a;
+}
+
+/* زر الثلاث خطوط (Hamburger Menu) */
+.menu-toggle-btn {
+    background: transparent;
+    border: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 26px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.menu-toggle-btn span {
+    display: block;
+    height: 3px;
+    width: 100%;
+    background-color: #e5c158;
+    border-radius: 2px;
+}
+
+.login-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: transparent;
+    border: 1px solid #e5c158;
+    color: #e5c158;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.logo-area {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.logo-text h1 {
+    font-size: 18px;
+    color: #e5c158;
+    line-height: 1;
+    margin-bottom: 2px;
+}
+
+.logo-text p {
+    font-size: 9px;
+    color: #888;
+}
+
+.logo-icon {
+    font-size: 20px;
+    background: #2a2a2a;
+    padding: 5px;
+    border-radius: 10px;
+    border: 1px solid #e5c158;
+}
+
+/* تصميم القائمة الجانبية (Side Drawer) */
+.side-drawer {
+    position: fixed;
+    top: 0;
+    left: -100%; /* مخفية بالبداية نحو اليسار */
+    width: 80%;
+    max-width: 320px;
+    height: 100%;
+    background-color: #181818;
+    box-shadow: 5px 0 15px rgba(0,0,0,0.5);
+    z-index: 3000;
+    transition: 0.3s ease-in-out;
+    border-left: 1px solid #2a2a2a;
+    overflow-y: auto;
+}
+
+.side-drawer.open {
+    left: 0; /* تظهر عند فتحها */
+}
+
+.drawer-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background-color: #1f1f1f;
+    border-bottom: 1px solid #2a2a2a;
+    color: #e5c158;
+}
+
+.close-drawer {
+    font-size: 26px;
+    cursor: pointer;
+    color: #aaa;
+}
+
+.drawer-body {
+    padding: 20px;
+}
+
+/* بطاقة الملف الشخصي الكاملة */
+.profile-card-full {
+    text-align: center;
+}
+
+.profile-avatar-wrap {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 12px auto;
+}
+
+.profile-avatar-wrap img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #e5c158;
+}
+
+.profile-card-full h3 {
+    color: #fff;
+    font-size: 16px;
+    margin-bottom: 15px;
+}
+
+.bio-section {
+    margin-bottom: 20px;
+    text-align: right;
+}
+
+.bio-section textarea {
+    width: 100%;
+    background-color: #121212;
+    border: 1px solid #333;
+    color: #fff;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 12px;
+    height: 70px;
+    resize: none;
+    margin-bottom: 8px;
+}
+
+.bio-section button {
+    width: 100%;
+    background-color: #e5c158;
+    color: #121212;
+    border: none;
+    padding: 8px;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.profile-stats {
+    display: flex;
+    justify-content: space-between;
+    background-color: #121212;
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid #2a2a2a;
+}
+
+.stat-box {
+    flex: 1;
+    text-align: center;
+}
+
+.stat-box span {
+    display: block;
+    color: #e5c158;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.stat-box p {
+    color: #888;
+    font-size: 10px;
+    margin-top: 2px;
+}
+
+/* المحتوى الرئيسي */
+.main-content {
+    padding: 20px;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 20px;
+}
+
+.sec-title-group h2 {
+    font-size: 18px;
+    color: #e5c158;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.sec-title-group p {
+    font-size: 12px;
+    color: #aaa;
+}
+
+.sec-icon {
+    font-size: 28px;
+    background-color: #e5c158;
+    color: #121212;
+    padding: 8px;
+    border-radius: 12px;
+}
+
+.competition-card {
+    background-color: #1c1c1c;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid #2c2c2c;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+}
+
+.card-image {
+    position: relative;
+    height: 180px;
+    width: 100%;
+}
+
+.card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background-color: rgba(28, 28, 28, 0.85);
+    border: 1px solid #e5c158;
+    color: #e5c158;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.card-body {
+    padding: 16px;
+}
+
+.card-body h3 {
+    font-size: 16px;
+    color: #fff;
+    margin-bottom: 8px;
+    font-weight: 700;
+}
+
+.card-body p {
+    font-size: 12px;
+    color: #999;
+    line-height: 1.5;
+}
+
+.user-post-card {
+    background-color: #1c1c1c;
+    border-radius: 14px;
+    padding: 16px;
+    margin-bottom: 15px;
+    border: 1px solid #2c2c2c;
+}
+
+.user-post-card h4 {
+    color: #e5c158;
+    font-size: 15px;
+    margin-bottom: 8px;
+}
+
+.user-post-card p {
+    color: #ccc;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+/* النافذة المنبثقة للكتابة */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.8);
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.modal-content {
+    background-color: #1a1a1a;
+    border: 1px solid #e5c158;
+    border-radius: 16px;
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    color: #e5c158;
+}
+
+.close-btn {
+    font-size: 24px;
+    cursor: pointer;
+    color: #aaa;
+}
+
+.modal-body input, .modal-body textarea {
+    width: 100%;
+    background-color: #121212;
+    border: 1px solid #333;
+    color: #fff;
+    padding: 12px;
+    border-radius: 10px;
+    margin-bottom: 12px;
+    font-size: 13px;
+}
+
+.modal-body textarea {
+    height: 120px;
+    resize: none;
+}
+
+.modal-body button {
+    width: 100%;
+    background-color: #e5c158;
+    color: #121212;
+    border: none;
+    padding: 12px;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+/* شريط التنقل السفلي */
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 65px;
+    background-color: #181818;
+    border-top: 1px solid #2a2a2a;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0 5px;
+    z-index: 1000;
+}
+
+.nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #777;
+    text-decoration: none;
+    font-size: 10px;
+    gap: 3px;
+    flex: 1;
+}
+
+.nav-item.active {
+    color: #e5c158;
+}
+
+.nav-center-btn-wrapper {
+    position: relative;
+    top: -18px;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.center-write-btn {
+    background-color: #e5c158;
+    color: #121212;
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Cairo', sans-serif;
+}
+
+body {
+    background-color: #121212;
+    color: #ffffff;
+    direction: rtl;
+    padding-bottom: 90px;
+}
+
+.app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 15px;
+    background-color: #1a1a1a;
+    border-bottom: 1px solid #2a2a2a;
+}
+
+/* زر الثلاث خطوط (Hamburger Menu) */
+.menu-toggle-btn {
+    background: transparent;
+    border: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 26px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.menu-toggle-btn span {
+    display: block;
+    height: 3px;
+    width: 100%;
+    background-color: #e5c158;
+    border-radius: 2px;
+}
+
+.login-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: transparent;
+    border: 1px solid #e5c158;
+    color: #e5c158;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.logo-area {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.logo-text h1 {
+    font-size: 18px;
+    color: #e5c158;
+    line-height: 1;
+    margin-bottom: 2px;
+}
+
+.logo-text p {
+    font-size: 9px;
+    color: #888;
+}
+
+.logo-icon {
+    font-size: 20px;
+    background: #2a2a2a;
+    padding: 5px;
+    border-radius: 10px;
+    border: 1px solid #e5c158;
+}
+
+/* تصميم القائمة الجانبية (Side Drawer) */
+.side-drawer {
+    position: fixed;
+    top: 0;
+    left: -100%; /* مخفية بالبداية نحو اليسار */
+    width: 80%;
+    max-width: 320px;
+    height: 100%;
+    background-color: #181818;
+    box-shadow: 5px 0 15px rgba(0,0,0,0.5);
+    z-index: 3000;
+    transition: 0.3s ease-in-out;
+    border-left: 1px solid #2a2a2a;
+    overflow-y: auto;
+}
+
+.side-drawer.open {
+    left: 0; /* تظهر عند فتحها */
+}
+
+.drawer-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background-color: #1f1f1f;
+    border-bottom: 1px solid #2a2a2a;
+    color: #e5c158;
+}
+
+.close-drawer {
+    font-size: 26px;
+    cursor: pointer;
+    color: #aaa;
+}
+
+.drawer-body {
+    padding: 20px;
+}
+
+/* بطاقة الملف الشخصي الكاملة */
+.profile-card-full {
+    text-align: center;
+}
+
+.profile-avatar-wrap {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 12px auto;
+}
+
+.profile-avatar-wrap img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #e5c158;
+}
+
+.profile-card-full h3 {
+    color: #fff;
+    font-size: 16px;
+    margin-bottom: 15px;
+}
+
+.bio-section {
+    margin-bottom: 20px;
+    text-align: right;
+}
+
+.bio-section textarea {
+    width: 100%;
+    background-color: #121212;
+    border: 1px solid #333;
+    color: #fff;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 12px;
+    height: 70px;
+    resize: none;
+    margin-bottom: 8px;
+}
+
+.bio-section button {
+    width: 100%;
+    background-color: #e5c158;
+    color: #121212;
+    border: none;
+    padding: 8px;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.profile-stats {
+    display: flex;
+    justify-content: space-between;
+    background-color: #121212;
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid #2a2a2a;
+}
+
+.stat-box {
+    flex: 1;
+    text-align: center;
+}
+
+.stat-box span {
+    display: block;
+    color: #e5c158;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.stat-box p {
+    color: #888;
+    font-size: 10px;
+    margin-top: 2px;
+}
+
+/* المحتوى الرئيسي */
+.main-content {
+    padding: 20px;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 20px;
+}
+
+.sec-title-group h2 {
+    font-size: 18px;
+    color: #e5c158;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.sec-title-group p {
+    font-size: 12px;
+    color: #aaa;
+}
+
+.sec-icon {
+    font-size: 28px;
+    background-color: #e5c158;
+    color: #121212;
+    padding: 8px;
+    border-radius: 12px;
+}
+
+.competition-card {
+    background-color: #1c1c1c;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid #2c2c2c;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+}
+
+.card-image {
+    position: relative;
+    height: 180px;
+    width: 100%;
+}
+
+.card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background-color: rgba(28, 28, 28, 0.85);
+    border: 1px solid #e5c158;
+    color: #e5c158;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.card-body {
+    padding: 16px;
+}
+
+.card-body h3 {
+    font-size: 16px;
+    color: #fff;
+    margin-bottom: 8px;
+    font-weight: 700;
+}
+
+.card-body p {
+    font-size: 12px;
+    color: #999;
+    line-height: 1.5;
+}
+
+.user-post-card {
+    background-color: #1c1c1c;
+    border-radius: 14px;
+    padding: 16px;
+    margin-bottom: 15px;
+    border: 1px solid #2c2c2c;
+}
+
+.user-post-card h4 {
+    color: #e5c158;
+    font-size: 15px;
+    margin-bottom: 8px;
+}
+
+.user-post-card p {
+    color: #ccc;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+/* النافذة المنبثقة للكتابة */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.8);
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.modal-content {
+    background-color: #1a1a1a;
+    border: 1px solid #e5c158;
+    border-radius: 16px;
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    color: #e5c158;
+}
+
+.close-btn {
+    font-size: 24px;
+    cursor: pointer;
+    color: #aaa;
+}
+
+.modal-body input, .modal-body textarea {
+    width: 100%;
+    background-color: #121212;
+    border: 1px solid #333;
+    color: #fff;
+    padding: 12px;
+    border-radius: 10px;
+    margin-bottom: 12px;
+    font-size: 13px;
+}
+
+.modal-body textarea {
+    height: 120px;
+    resize: none;
+}
+
+.modal-body button {
+    width: 100%;
+    background-color: #e5c158;
+    color: #121212;
+    border: none;
+    padding: 12px;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+/* شريط التنقل السفلي */
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 65px;
+    background-color: #181818;
+    border-top: 1px solid #2a2a2a;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0 5px;
+    z-index: 1000;
+}
+
+.nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #777;
+    text-decoration: none;
+    font-size: 10px;
+    gap: 3px;
+    flex: 1;
+}
+
+.nav-item.active {
+    color: #e5c158;
+}
+
+.nav-center-btn-wrapper {
+    position: relative;
+    top: -18px;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.center-write-btn {
+    background-color: #e5c158;
+    color: #121212;
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(229, 193, 88, 0.4);
+    cursor: pointer;
+}
+  align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(229, 193, 88, 0.4);
+    cursor: pointer;
+}
