@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سُدُف - تسجيل الدخول</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7f6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .login-container {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+        h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .google-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #white;
+            color: #444;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            padding: 10px 15px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s, box-shadow 0.3s;
+            margin-top: 15px;
+        }
+        .google-btn:hover {
+            background-color: #f8f9fa;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .google-icon {
+            width: 20px;
+            height: 20px;
+            margin-left: 10px;
+        }
+        #user-info {
+            display: none;
+            margin-top: 15px;
+            color: #27ae60;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-container">
+        <h2>تسجيل الدخول إلى سُدُف</h2>
+        
+        <!-- خيار تسجيل الدخول باستخدام جوجل -->
+        <button id="google-login-btn" class="google-btn">
+            <svg class="google-icon" viewBox="0 0 24 24">
+                <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.66-5.17 3.66-9.17z"/>
+                <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.13 0-5.78-2.11-6.73-4.96H1.19v3.14C3.16 21.32 7.22 24 12 24z"/>
+                <path fill="#FBBC05" d="M5.27 14.24c-.25-.72-.38-1.49-.38-2.24s.13-1.52.38-2.24V6.62H1.19C.43 8.15 0 9.89 0 12s.43 3.85 1.19 5.38l4.08-3.14z"/>
+                <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.22 0 3.16 2.68 1.19 6.62l4.08 3.14c.95-2.85 3.6-4.96 6.73-4.96z"/>
+            </svg>
+            المتابعة باستخدام جوجل
+        </button>
+
+        <div id="user-info">تم تسجيل الدخول بنجاح!</div>
+    </div>
+
+    <!-- تكوين وفيربيس والمنطق البرمجي -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.17.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.17.0/firebase-analytics.js";
+        import { getAuth, signInWithPopup, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/12.17.0/firebase-auth.js";
+
+        // إعدادات فايربيس الخاصة بك
+        const firebaseConfig = {
+            apiKey: "AIzaSyCND64kxigacSdgRqKJ9CtWU5DMfIpB1MQ",
+            authDomain: "sudofnew.firebaseapp.com",
+            projectId: "sudofnew",
+            storageBucket: "sudofnew.firebasestorage.app",
+            messagingSenderId: "707148495684",
+            appId: "1:707148495684:web:958816d404a7e3da477511",
+            measurementId: "G-TR4YVG88J3"
+        };
+
+        // تهيئة فايربيس
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const auth = getAuth(app);
+        const provider = new GoogleAuthProvider();
+
+        // تفعيل حدث النقر على زر تسجيل الدخول بجوجل
+        document.getElementById('google-login-btn').addEventListener('click', () => {
+            signInWithPopup(auth, provider)
+                .then((result) => {
+                    // تم تسجيل الدخول بنجاح
+                    const user = result.user;
+                    console.log("مرحباً، " + user.displayName);
+                    document.getElementById('user-info').style.display = 'block';
+                    document.getElementById('user-info').innerText = `أهلاً بك، ${user.displayName}`;
+                })
+                .catch((error) => {
+                    console.error("خطأ في تسجيل الدخول: ", error.message);
+                    alert("حدث خطأ أثناء تسجيل الدخول، يجدر التأكد من تفعيل Google Provider في لوحة تحكم Firebase.");
+                });
+        });
+    </script>
+</body>
+              </html>
