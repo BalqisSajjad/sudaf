@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سُدُف - ملتقى الأدب والفكر</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #121212;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: #ffffff;
+            overflow: hidden;
+        }
+
+        /* شاشة الترحيب الأولى */
+        #welcome-screen {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            width: 100%;
+            height: 100vh;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: #121212;
+            z-index: 10;
+            transition: opacity 0.5s ease;
+        }
+        .feather-icon {
+            font-size: 50px;
+            margin-bottom: 15px;
+        }
+        .welcome-title {
+            font-size: 42px;
+            font-weight: bold;
+            color: #d4af37;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+        .welcome-subtitle {
+            font-size: 16px;
+            color: #aaa;
+            margin-bottom: 40px;
+        }
+        .welcome-btn-outline {
+            background: transparent;
+            color: #d4af37;
+            border: 2px solid #d4af37;
+            border-radius: 12px;
+            padding: 14px 30px;
+            font-size: 16px;
+            width: 85%;
+            max-width: 320px;
+            margin-bottom: 15px;
+            cursor: default;
+        }
+        .welcome-btn-solid {
+            background: linear-gradient(135deg, #d4af37, #aa8c2c);
+            color: #121212;
+            border: none;
+            border-radius: 12px;
+            padding: 15px 30px;
+            font-size: 18px;
+            font-weight: bold;
+            width: 85%;
+            max-width: 320px;
+            cursor: pointer;
+            transition: transform 0.2s, opacity 0.2s;
+        }
+        .welcome-btn-solid:active {
+            transform: scale(0.98);
+            opacity: 0.9;
+        }
+        .welcome-footer {
+            position: absolute;
+            bottom: 30px;
+            font-size: 13px;
+            color: #777;
+        }
+
+        /* شاشة تسجيل الدخول (نفس لون شاشة الترحيب) */
+        #login-screen {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100vh;
+            background: #121212;
+        }
+        .site-title {
+            font-size: 36px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #d4af37;
+            letter-spacing: 1px;
+        }
+        .login-container {
+            background: #1e1e1e;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+            border: 1px solid #333;
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+            color: #ffffff;
+            box-sizing: border-box;
+        }
+        h2 {
+            margin-bottom: 20px;
+            color: #d4af37;
+            font-size: 22px;
+        }
+        .input-group {
+            margin-bottom: 15px;
+            text-align: right;
+        }
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #ccc;
+            font-size: 14px;
+        }
+        .input-group input {
+            width: 100%;
+            padding: 12px;
+            background: #2c2c2c;
+            border: 1px solid #444;
+            color: #fff;
+            border-radius: 6px;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+        .input-group input:focus {
+            border-color: #d4af37;
+            outline: none;
+        }
+        .auth-btn {
+            background: linear-gradient(135deg, #d4af37, #aa8c2c);
+            color: #121212;
+            border: none;
+            border-radius: 6px;
+            padding: 12px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            transition: opacity 0.2s;
+            margin-top: 10px;
+        }
+        .auth-btn:hover {
+            opacity: 0.9;
+        }
+        .toggle-mode {
+            margin-top: 15px;
+            font-size: 14px;
+            color: #aaa;
+        }
+        .toggle-mode a {
+            color: #d4af37;
+            text-decoration: none;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        #user-info {
+            display: none;
+            margin-top: 15px;
+            color: #d4af37;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 1. شاشة الترحيب الأولى -->
+    <div id="welcome-screen">
+        <div class="feather-icon">🪶</div>
+        <div class="welcome-title">سُدُف</div>
+        <div class="welcome-subtitle">ملتقى الأدب والفكر العربي الفصيح</div>
+
+        <div class="welcome-btn-outline">أهلاً وسهلاً بكم في منصة سُدُف الأدبية</div>
+        <button id="start-btn" class="welcome-btn-solid">لنبدأ ←</button>
+
+        <div class="welcome-footer">منصة سُدُف — للشعر والنثر والنقد الأدبي</div>
+    </div>
+
+    <!-- 2. شاشة تسجيل الدخول -->
+    <div id="login-screen">
+        <div class="site-title">سُدُف</div>
+
+        <div class="login-container">
+            <h2 id="form-title">تسجيل الدخول</h2>
+            
+            <div class="input-group">
+                <label>البريد الإلكتروني</label>
+                <input type="email" id="email" placeholder="أدخل بريدك الإلكتروني">
+            </div>
+
+            <div class="input-group">
+                <label>كلمة المرور</label>
+                <input type="password" id="password" placeholder="أدخل كلمة المرور">
+            </div>
+
+            <button id="auth-btn" class="auth-btn">تسجيل الدخول</button>
+
+            <div class="toggle-mode">
+                <span id="toggle-text">ليس لديك حساب؟</span> 
+                <a id="toggle-link">إنشاء حساب جديد</a>
+            </div>
+
+            <div id="user-info"></div>
+        </div>
+    </div>
+
+    <!-- تكوين فايربيس والمنطق البرمجي -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.17.0/firebase-app.js";
+        import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.17.0/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCND64kxigacSdgRqKJ9CtWU5DMfIpB1MQ",
+            authDomain: "sudofnew.firebaseapp.com",
+            projectId: "sudofnew",
+            storageBucket: "sudofnew.firebasestorage.app",
+            messagingSenderId: "707148495684",
+            appId: "1:707148495684:web:958816d404a7e3da477511",
+            measurementId: "G-TR4YVG88J3"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        const startBtn = document.getElementById('start-btn');
+        const welcomeScreen = document.getElementById('welcome-screen');
+        const loginScreen = document.getElementById('login-screen');
+
+        startBtn.addEventListener('click', () => {
+            welcomeScreen.style.opacity = '0';
+            setTimeout(() => {
+                welcomeScreen.style.display = 'none';
+                loginScreen.style.display = 'flex';
+            }, 300);
+        });
+
+        let isSignUp = false;
+
+        const formTitle = document.getElementById('form-title');
+        const authBtn = document.getElementById('auth-btn');
+        const toggleText = document.getElementById('toggle-text');
+        const toggleLink = document.getElementById('toggle-link');
+        const userInfo = document.getElementById('user-info');
+
+        toggleLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            isSignUp = !isSignUp;
+            if (isSignUp) {
+                formTitle.innerText = "إنشاء حساب جديد";
+                authBtn.innerText = "إنشاء الحساب";
+                toggleText.innerText = "لديك حساب بالفعل؟";
+                toggleLink.innerText = "تسجيل الدخول";
+            } else {
+                formTitle.innerText = "تسجيل الدخول";
+                authBtn.innerText = "تسجيل الدخول";
+                toggleText.innerText = "ليس لديك حساب؟";
+                toggleLink.innerText = "إنشاء حساب جديد";
+            }
+        });
+
+        authBtn.addEventListener('click', () => {
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value.trim();
+
+            if (!email || !password) {
+                alert("الرجاء إدخال البريد الإلكتروني وكلمة المرور.");
+                return;
+            }
+
+            authBtn.innerText = "جاري التنفيذ...";
+            authBtn.disabled = true;
+
+            if (isSignUp) {
+                createUserWithEmailAndPassword(auth, email, password)
+                    .then((result) => {
+                        userInfo.style.display = 'block';
+                        userInfo.innerText = `تم إنشاء الحساب بنجاح! جاري التحويل...`;
+                        setTimeout(() => {
+                            window.location.href = "index.html";
+                        }, 1000);
+                    })
+                    .catch((error) => {
+                        authBtn.innerText = "إنشاء الحساب";
+                        authBtn.disabled = false;
+                        alert("خطأ: " + error.message);
+                    });
+            } else {
+                signInWithEmailAndPassword(auth, email, password)
+                    .then((result) => {
+                        userInfo.style.display = 'block';
+                        userInfo.innerText = `تم تسجيل الدخول بنجاح! جاري التحويل...`;
+                        setTimeout(() => {
+                            window.location.href = "index.html";
+                        }, 1000);
+                    })
+                    .catch((error) => {
+                        authBtn.innerText = "تسجيل الدخول";
+                        authBtn.disabled = false;
+                        alert("خطأ في تسجيل الدخول: تأكد من صحة البريد وكلمة المرور.");
+                    });
+            }
+        });
+    </script>
+</body>
+  </html>
