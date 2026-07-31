@@ -1,0 +1,1996 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سُدُف - ملتقى الأدب والفكر</title>
+    <!-- مكتبة EmailJS لإرسال كود التحقق -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function() {
+            emailjs.init("ykVFDNyDtgVlwD0Uq");
+        })();
+    </script>
+    <style>
+        :root {
+            --bg-color: #121212;
+            --surface-color: #1a1a1a;
+            --surface-card: #1e1e1e;
+            --text-color: #ffffff;
+            --text-secondary: #aaa;
+            --accent-color: #d4af37;
+            --accent-gradient: linear-gradient(135deg, #d4af37, #aa8c2c);
+            --border-color: #333;
+            --font-size-base: 14px;
+        }
+
+        body.light-mode {
+            --bg-color: #f4f4f5;
+            --surface-color: #ffffff;
+            --surface-card: #fdfdfd;
+            --text-color: #1a1a1a;
+            --text-secondary: #666;
+            --accent-color: #b89728;
+            --accent-gradient: linear-gradient(135deg, #c5a03e, #96781e);
+            --border-color: #ddd;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--bg-color);
+            margin: 0;
+            color: var(--text-color);
+            direction: rtl;
+            font-size: var(--font-size-base);
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        .svg-icon {
+            width: 22px;
+            height: 22px;
+            fill: currentColor;
+            display: inline-block;
+            vertical-align: middle;
+            transition: transform 0.3s ease, filter 0.3s ease;
+        }
+        .svg-icon.glow {
+            filter: drop-shadow(0 0 3px rgba(212, 175, 55, 0.4));
+        }
+
+        #welcome-screen {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            width: 100%;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background: var(--bg-color);
+            z-index: 100;
+            transition: opacity 0.5s ease;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .welcome-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 320px;
+            width: 100%;
+        }
+        .feather-icon-box {
+            font-size: 42px;
+            margin-bottom: 10px;
+        }
+        .welcome-title {
+            font-size: 34px;
+            font-weight: bold;
+            color: var(--accent-color);
+            margin-bottom: 8px;
+            letter-spacing: 1px;
+        }
+        .welcome-subtitle {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+        }
+        .welcome-btn-outline {
+            background: transparent;
+            color: var(--accent-color);
+            border: 2px solid var(--accent-color);
+            border-radius: 10px;
+            padding: 12px 20px;
+            font-size: 14px;
+            width: 100%;
+            margin-bottom: 12px;
+            box-sizing: border-box;
+        }
+        .welcome-btn-solid {
+            background: var(--accent-gradient);
+            color: #121212;
+            border: none;
+            border-radius: 10px;
+            padding: 13px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            width: 100%;
+            cursor: pointer;
+            box-sizing: border-box;
+        }
+        .welcome-footer {
+            margin-top: 35px;
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        #login-screen {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100vh;
+            background: var(--bg-color);
+            padding: 20px;
+            box-sizing: border-box;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 90;
+        }
+        .login-container {
+            background: var(--surface-card);
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border-color);
+            width: 100%;
+            max-width: 360px;
+            text-align: center;
+            box-sizing: border-box;
+        }
+        .login-container h2 {
+            margin-bottom: 15px;
+            color: var(--accent-color);
+            font-size: 20px;
+        }
+        .input-group {
+            margin-bottom: 12px;
+            text-align: right;
+        }
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: var(--text-secondary);
+            font-size: 13px;
+        }
+        .input-group input {
+            width: 100%;
+            padding: 10px;
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            border-radius: 6px;
+            font-size: 14px;
+            box-sizing: border-box;
+            text-align: right;
+        }
+        .auth-btn {
+            background: var(--accent-gradient);
+            color: #121212;
+            border: none;
+            border-radius: 6px;
+            padding: 11px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 8px;
+            box-sizing: border-box;
+        }
+        #otp-section {
+            display: none;
+        }
+
+        #app-main-screen {
+            display: none;
+            flex-direction: column;
+            min-height: 100vh;
+            padding-bottom: 70px;
+            background: var(--bg-color);
+            position: relative;
+        }
+        .app-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            border-bottom: 1px solid var(--border-color);
+            background: var(--surface-color);
+        }
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .mini-feather {
+            font-size: 24px;
+            background: var(--surface-card);
+            padding: 8px;
+            border-radius: 8px;
+            border: 1px solid var(--accent-color);
+            color: var(--accent-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .logo-text h1 {
+            margin: 0;
+            font-size: 20px;
+            color: var(--accent-color);
+        }
+        .logo-text span {
+            font-size: 11px;
+            color: var(--text-secondary);
+        }
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .user-mini-profile {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--surface-card);
+            border: 1px solid var(--accent-color);
+            padding: 4px 10px;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+        .user-mini-profile img {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        .user-mini-profile span {
+            font-size: 12px;
+            color: var(--accent-color);
+            max-width: 90px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .menu-icon {
+            font-size: 22px;
+            color: var(--accent-color);
+            cursor: pointer;
+            padding: 5px;
+            display: flex;
+            align-items: center;
+        }
+
+        #side-drawer {
+            position: fixed;
+            top: 0;
+            right: -280px;
+            width: 280px;
+            height: 100vh;
+            background: var(--surface-color);
+            border-left: 1px solid var(--border-color);
+            z-index: 200;
+            transition: right 0.3s ease;
+            box-shadow: -5px 0 25px rgba(0,0,0,0.5);
+            display: flex;
+            flex-direction: column;
+            box-sizing: border-box;
+            padding: 20px;
+            overflow-y: auto;
+        }
+        #side-drawer.open {
+            right: 0;
+        }
+        .drawer-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 12px;
+            margin-bottom: 15px;
+        }
+        .drawer-close {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 20px;
+            cursor: pointer;
+        }
+        
+        .drawer-profile-box {
+            text-align: center;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border-color);
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            background: var(--surface-card);
+            border: 1px solid var(--border-color);
+            padding-top: 10px;
+        }
+        .profile-banner-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 80px;
+            background-size: cover;
+            background-position: center;
+            z-index: 1;
+        }
+        .drawer-avatar-container {
+            position: relative;
+            width: 75px;
+            height: 75px;
+            margin: 35px auto 8px auto;
+            cursor: pointer;
+            z-index: 2;
+        }
+        .drawer-avatar-container img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--accent-color);
+            background: var(--surface-color);
+        }
+        .rank-badge-overlay {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            background: var(--accent-color);
+            color: #121212;
+            font-size: 9px;
+            font-weight: bold;
+            padding: 2px 6px;
+            border-radius: 10px;
+            border: 1px solid var(--bg-color);
+            z-index: 3;
+        }
+        .drawer-avatar-container input {
+            display: none;
+        }
+        .drawer-username {
+            font-size: 16px;
+            font-weight: bold;
+            color: var(--text-color);
+            margin-bottom: 3px;
+            position: relative;
+            z-index: 2;
+        }
+        .drawer-user-rank-txt {
+            font-size: 11px;
+            color: var(--accent-color);
+            margin-bottom: 8px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .bio-box-wrapper {
+            position: relative;
+            width: 100%;
+            box-sizing: border-box;
+            padding: 0 10px;
+            z-index: 2;
+        }
+        .drawer-bio {
+            font-size: 12px;
+            color: var(--text-color);
+            background: var(--bg-color);
+            padding: 8px;
+            border-radius: 6px;
+            border: 1px dashed var(--border-color);
+            outline: none;
+            width: 100%;
+            box-sizing: border-box;
+            resize: none;
+            text-align: right;
+            direction: rtl;
+            font-family: inherit;
+            height: 50px;
+        }
+        .bio-counter {
+            font-size: 10px;
+            color: var(--text-secondary);
+            text-align: left;
+            margin-top: 2px;
+            margin-bottom: 5px;
+            padding: 0 10px;
+        }
+        .admin-banner-input-box {
+            padding: 0 10px 8px 10px;
+            z-index: 2;
+            position: relative;
+            text-align: right;
+        }
+        .admin-banner-input-box label {
+            font-size: 10px;
+            color: var(--accent-color);
+            display: block;
+            margin-bottom: 2px;
+        }
+        .admin-banner-input-box input {
+            width: 100%;
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            font-size: 11px;
+            padding: 5px;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .save-profile-btn {
+            background: var(--accent-color);
+            color: #121212;
+            border: none;
+            border-radius: 4px;
+            padding: 6px 10px;
+            font-size: 11px;
+            font-weight: bold;
+            cursor: pointer;
+            width: calc(100% - 20px);
+            margin: 0 10px 10px 10px;
+            z-index: 2;
+            position: relative;
+        }
+        .drawer-menu-list {
+            list-style: none;
+            padding: 0;
+            margin: 15px 0;
+        }
+        .drawer-menu-item {
+            padding: 10px 12px;
+            color: var(--text-color);
+            font-size: 14px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: background 0.2s;
+        }
+        .drawer-menu-item:hover {
+            background: rgba(212, 175, 55, 0.1);
+            color: var(--accent-color);
+        }
+
+        .admin-section-box {
+            margin-top: auto;
+            padding-top: 15px;
+            border-top: 1px solid var(--border-color);
+        }
+        @keyframes glowingBackground {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .owners-glowing-box {
+            background: linear-gradient(-45deg, #1a1505, #2c2208, #141414, #332600);
+            background-size: 400% 400%;
+            animation: glowingBackground 8s ease infinite;
+            border: 1px solid var(--accent-color);
+            border-radius: 10px;
+            padding: 12px;
+            text-align: center;
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.2);
+            margin-top: 5px;
+        }
+        .owners-label-title {
+            font-size: 11px;
+            font-weight: bold;
+            color: #ffdf73;
+            letter-spacing: 1.5px;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+        .owner-name-item {
+            font-size: 13px;
+            color: #fff;
+            font-weight: bold;
+            margin-bottom: 4px;
+        }
+        .instagram-badge-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 8px;
+            padding: 5px 12px;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid #e1306c;
+            border-radius: 20px;
+            color: #fff;
+            text-decoration: none;
+            font-size: 11px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        .instagram-badge-link:hover {
+            background: #e1306c;
+            transform: scale(1.05);
+        }
+
+        .tab-content {
+            display: none;
+            padding: 15px;
+            max-width: 600px;
+            margin: 0 auto;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .tab-content.active-tab {
+            display: block;
+        }
+
+        .section-banner {
+            background: linear-gradient(135deg, rgba(212,175,55,0.15), rgba(30,30,30,0.4));
+            border: 1px solid var(--accent-color);
+            border-radius: 12px;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        .banner-icon {
+            font-size: 32px;
+            background: var(--accent-color);
+            padding: 10px 14px;
+            border-radius: 10px;
+            color: #121212;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .banner-text h3 {
+            margin: 0 0 5px 0;
+            color: var(--accent-color);
+            font-size: 18px;
+        }
+        .banner-text p {
+            margin: 0;
+            color: var(--text-secondary);
+            font-size: 12px;
+        }
+
+        #tab-admin-chat {
+            display: none;
+            flex-direction: column;
+            position: fixed !important;
+            top: 61px !important;
+            left: 0 !important;
+            width: 100% !important;
+            height: calc(100vh - 121px) !important;
+            max-width: 100% !important;
+            padding: 0 !important;
+            margin: 0 !important;
+            background: var(--bg-color) !important;
+            z-Index: 40;
+            box-sizing: border-box;
+        }
+        #tab-admin-chat.active-tab {
+            display: flex !important;
+        }
+        .chat-screen-header {
+            background: var(--surface-color);
+            border-bottom: 1px solid var(--border-color);
+            padding: 10px 15px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-shrink: 0;
+        }
+        .chat-back-btn {
+            background: var(--surface-card);
+            border: 1px solid var(--accent-color);
+            color: var(--accent-color);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 18px;
+        }
+        .chat-screen-header-info h4 {
+            margin: 0;
+            color: var(--accent-color);
+            font-size: 14px;
+        }
+        .chat-screen-header-info span {
+            font-size: 10px;
+            color: var(--text-secondary);
+        }
+        .chat-messages-box {
+            flex: 1;
+            overflow-y: auto;
+            background: var(--bg-color);
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            box-sizing: border-box;
+        }
+        .chat-msg-card {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            max-width: 85%;
+        }
+        .chat-msg-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 1px solid var(--accent-color);
+            flex-shrink: 0;
+        }
+        .chat-msg-body {
+            background: var(--surface-card);
+            border: 1px solid var(--border-color);
+            padding: 10px 14px;
+            border-radius: 12px;
+            border-top-right-radius: 2px;
+        }
+        .chat-msg-user-header {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 4px;
+        }
+        .chat-msg-username {
+            font-size: 13px;
+            font-weight: bold;
+            color: var(--accent-color);
+        }
+        .chat-msg-rank-tag {
+            font-size: 9px;
+            background: rgba(212, 175, 55, 0.15);
+            color: var(--accent-color);
+            border: 1px solid var(--accent-color);
+            padding: 1px 6px;
+            border-radius: 10px;
+        }
+        .chat-msg-text {
+            font-size: 13px;
+            color: var(--text-color);
+            line-height: 1.4;
+            word-break: break-word;
+        }
+        .chat-input-bar {
+            background: var(--surface-color);
+            border-top: 1px solid var(--border-color);
+            padding: 10px 15px;
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            flex-shrink: 0;
+        }
+        .chat-input-bar input {
+            flex: 1;
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            padding: 10px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            outline: none;
+            box-sizing: border-box;
+        }
+        .chat-input-bar button {
+            background: var(--accent-gradient);
+            color: #121212;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 13px;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        #settings-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(0,0,0,0.75);
+            backdrop-filter: blur(5px);
+            z-index: 300;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .settings-card {
+            background: linear-gradient(145deg, var(--surface-color), var(--surface-card));
+            border: 2px solid var(--accent-color);
+            border-radius: 20px;
+            width: 100%;
+            max-width: 400px;
+            padding: 25px;
+            box-sizing: border-box;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+            animation: modalScaleUp 0.3s ease;
+        }
+        @keyframes modalScaleUp {
+            from { transform: scale(0.9); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        .settings-card h3 {
+            color: var(--accent-color);
+            margin: 0 0 20px 0;
+            font-size: 20px;
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+        .setting-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 18px;
+            padding: 12px;
+            background: var(--bg-color);
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            transition: all 0.2s;
+        }
+        .setting-item:hover {
+            border-color: var(--accent-color);
+        }
+        .setting-label span {
+            display: block;
+            font-size: 14px;
+            font-weight: bold;
+            color: var(--text-color);
+        }
+        .setting-label small {
+            font-size: 11px;
+            color: var(--text-secondary);
+        }
+        .setting-control select {
+            background: var(--surface-card);
+            color: var(--accent-color);
+            border: 1px solid var(--accent-color);
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 13px;
+            outline: none;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .setting-control input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            accent-color: var(--accent-color);
+            cursor: pointer;
+        }
+        .settings-close-btn {
+            background: var(--accent-gradient);
+            color: #121212;
+            border: none;
+            padding: 12px;
+            border-radius: 10px;
+            font-weight: bold;
+            width: 100%;
+            cursor: pointer;
+            font-size: 15px;
+            margin-top: 10px;
+        }
+
+        #members-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(0,0,0,0.85);
+            z-index: 300;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .members-card {
+            background: var(--surface-color);
+            border: 1px solid var(--accent-color);
+            border-radius: 12px;
+            width: 100%;
+            max-width: 440px;
+            max-height: 85vh;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .members-card h3 {
+            color: var(--accent-color);
+            margin: 0 0 15px 0;
+            font-size: 18px;
+            text-align: center;
+        }
+        .members-list-container {
+            flex: 1;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .member-row {
+            background: var(--surface-card);
+            padding: 12px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid var(--border-color);
+        }
+        .member-info-text span {
+            display: block;
+        }
+        .member-name-txt {
+            font-size: 14px;
+            color: var(--text-color);
+            font-weight: bold;
+        }
+        .member-email-txt {
+            font-size: 11px;
+            color: var(--text-secondary);
+        }
+        .member-current-rank {
+            font-size: 10px;
+            color: var(--accent-color);
+            margin-top: 3px;
+        }
+        .rank-actions {
+            display: flex;
+            gap: 4px;
+        }
+        .rank-btn {
+            background: var(--bg-color);
+            color: var(--text-secondary);
+            border: 1px solid var(--border-color);
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 10px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .rank-btn.active-rank {
+            background: var(--accent-color);
+            color: #121212;
+            border-color: var(--accent-color);
+        }
+        .close-modal-btn {
+            background: var(--surface-card);
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+            padding: 10px;
+            border-radius: 6px;
+            margin-top: 15px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        #custom-alert-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            box-sizing: border-box;
+            backdrop-filter: blur(4px);
+        }
+        .custom-alert-box {
+            background: var(--surface-color);
+            border: 1px solid var(--accent-color);
+            border-radius: 14px;
+            padding: 22px;
+            width: 100%;
+            max-width: 320px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+        }
+        .custom-alert-icon {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+        .custom-alert-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: var(--accent-color);
+            margin-bottom: 8px;
+        }
+        .custom-alert-message {
+            font-size: 13px;
+            color: var(--text-color);
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+        .custom-alert-btn {
+            background: var(--accent-gradient);
+            color: #121212;
+            border: none;
+            border-radius: 8px;
+            padding: 10px 20px;
+            font-size: 14px;
+            font-weight: bold;
+            width: 100%;
+            cursor: pointer;
+        }
+
+        .create-post-trigger-btn {
+            background: var(--accent-gradient);
+            color: #121212;
+            border: none;
+            border-radius: 10px;
+            padding: 12px 20px;
+            font-size: 15px;
+            font-weight: bold;
+            width: 100%;
+            cursor: pointer;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            box-shadow: 0 4px 15px rgba(212,175,55,0.25);
+        }
+        
+        .post-creation-card {
+            background: var(--surface-color);
+            border: 1px solid var(--accent-color);
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 20px;
+            display: none;
+        }
+        .post-creation-card textarea {
+            width: 100%;
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            padding: 12px;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 13px;
+            resize: none;
+            height: 90px;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+            outline: none;
+        }
+        .post-image-picker-label {
+            display: inline-block;
+            background: var(--surface-card);
+            color: var(--accent-color);
+            border: 1px dashed var(--accent-color);
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+        .post-image-preview {
+            max-width: 100%;
+            max-height: 150px;
+            border-radius: 6px;
+            display: none;
+            margin-bottom: 10px;
+        }
+        
+        .ig-post-card {
+            background: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            margin-bottom: 20px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        .ig-post-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 15px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .ig-post-avatar {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 1px solid var(--accent-color);
+        }
+        .ig-post-user-info span {
+            display: block;
+        }
+        .ig-post-author {
+            font-size: 14px;
+            font-weight: bold;
+            color: var(--text-color);
+        }
+        .ig-post-rank {
+            font-size: 11px;
+            color: var(--accent-color);
+        }
+        .ig-post-image-container {
+            width: 100%;
+            background: #000;
+            max-height: 350px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .ig-post-image-container img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
+        .ig-post-text-body {
+            padding: 15px;
+            font-size: 13.5px;
+            line-height: 1.6;
+            color: var(--text-color);
+            word-break: break-word;
+        }
+
+        .competition-card {
+            background: var(--surface-color);
+            border-radius: 14px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            margin-bottom: 20px;
+        }
+        .competition-info {
+            padding: 15px;
+        }
+        .competition-info h4 {
+            margin: 0 0 8px 0;
+            font-size: 18px;
+            color: var(--text-color);
+        }
+        .competition-info p {
+            margin: 0;
+            color: var(--text-secondary);
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: var(--surface-color);
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            height: 60px;
+            z-index: 50;
+            box-sizing: border-box;
+        }
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: var(--text-secondary);
+            font-size: 11px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            flex: 1;
+        }
+        .nav-item.active {
+            color: var(--accent-color);
+        }
+        .nav-icon {
+            margin-bottom: 2px;
+        }
+        .nav-center-btn {
+            position: relative;
+            top: -15px;
+            background: var(--accent-gradient);
+            color: #121212;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(212,175,55,0.4);
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="custom-alert-overlay">
+        <div class="custom-alert-box">
+            <div class="custom-alert-icon">🪶</div>
+            <div class="custom-alert-title">منصة سُدُف</div>
+            <div id="custom-alert-msg" class="custom-alert-message">محتوى الرسالة هنا...</div>
+            <button class="custom-alert-btn" onclick="closeCustomAlert()">حسنـاً</button>
+        </div>
+    </div>
+
+    <div id="settings-modal">
+        <div class="settings-card">
+            <h3>الإعدادات العامة</h3>
+            <div class="setting-item">
+                <div class="setting-label">
+                    <span>ثيم الموقع (الوضع)</span>
+                    <small>التبديل بين الوضع الداكن والفاتح</small>
+                </div>
+                <div class="setting-control">
+                    <select id="theme-select" onchange="changeWebsiteTheme(this.value)">
+                        <option value="dark">داكن (أسود)</option>
+                        <option value="light">فاتح (أبيض)</option>
+                    </select>
+                </div>
+            </div>
+            <div class="setting-item">
+                <div class="setting-label">
+                    <span>حجم الخط العام</span>
+                    <small>ضبط وضوح النصوص في المنصة</small>
+                </div>
+                <div class="setting-control">
+                    <select id="font-size-select" onchange="changeFontSize(this.value)">
+                        <option value="13px">صغير</option>
+                        <option value="14px" selected>متوسط</option>
+                        <option value="16px">كبير</option>
+                    </select>
+                </div>
+            </div>
+            <div class="setting-item">
+                <div class="setting-label">
+                    <span>الإشعارات الفورية</span>
+                    <small>تفعيل أو تعطيل التنبيهات</small>
+                </div>
+                <div class="setting-control">
+                    <input type="checkbox" id="notifications-toggle" checked onchange="toggleNotifications(this)">
+                </div>
+            </div>
+            <button class="settings-close-btn" onclick="closeSettingsModal()">إغلاق الإعدادات</button>
+        </div>
+    </div>
+
+    <div id="welcome-screen">
+        <div class="welcome-content">
+            <div class="feather-icon-box">
+                <svg class="svg-icon glow" viewBox="0 0 24 24"><path d="M20.5 3c-1.5 0-4 1.5-6 3.5S11 11.5 11 13.5c0 .5.2 1 .5 1.5L4 22l1.5 1.5 7-7.5c.5.3 1 .5 1.5.5 2 0 4-1.5 6-3.5S22 4.5 20.5 3z"/></svg>
+            </div>
+            <div class="welcome-title">سُدُف</div>
+            <div class="welcome-subtitle">ملتقى الأدب والفكر العربي الفصيح</div>
+            <div class="welcome-btn-outline">أهلاً وسهلاً بكم في منصة سُدُف الأدبية</div>
+            <button id="start-btn" class="welcome-btn-solid">لنبدأ ←</button>
+            <div class="welcome-footer">منصة سُدُف — للشعر والنثر والنقد الأدبي</div>
+        </div>
+    </div>
+
+    <div id="login-screen">
+        <div class="login-container">
+            <h2 id="form-title">تسجيل الدخول إلى سُدُف</h2>
+            
+            <div id="credentials-section">
+                <div class="input-group">
+                    <label>الاسم الكامل</label>
+                    <input type="text" id="fullname" placeholder="أدخل اسمك الكريم">
+                </div>
+                <div class="input-group">
+                    <label>البريد الإلكتروني</label>
+                    <input type="email" id="email" placeholder="example@domain.com">
+                </div>
+                <div class="input-group">
+                    <label>كلمة المرور</label>
+                    <input type="password" id="password" placeholder="••••••••">
+                </div>
+                <button id="send-otp-btn" class="auth-btn">التالي</button>
+            </div>
+
+            <div id="otp-section">
+                <p style="font-size: 13px; color: var(--accent-color); margin-bottom: 12px;">تم إرسال كود التحقق (6 أرقام) إلى بريدك الإلكتروني:</p>
+                <div class="input-group">
+                    <input type="text" id="otp-input" maxlength="6" placeholder="000000" style="letter-spacing: 5px; font-size: 18px; font-weight: bold; text-align: center;">
+                </div>
+                <button id="verify-otp-btn" class="auth-btn">التالي (الدخول للمنصة)</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="app-main-screen">
+        <header class="app-header">
+            <div class="logo-area">
+                <div class="mini-feather">
+                    <svg class="svg-icon glow" viewBox="0 0 24 24"><path d="M20.5 3c-1.5 0-4 1.5-6 3.5S11 11.5 11 13.5c0 .5.2 1 .5 1.5L4 22l1.5 1.5 7-7.5c.5.3 1 .5 1.5.5 2 0 4-1.5 6-3.5S22 4.5 20.5 3z"/></svg>
+                </div>
+                <div class="logo-text">
+                    <h1>سُدُف</h1>
+                    <span>منصة الأدب العربي</span>
+                </div>
+            </div>
+            <div class="header-left">
+                <div class="user-mini-profile" onclick="openSideDrawer()">
+                    <img id="header-avatar-img" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80" alt="صورة الملف">
+                    <span id="header-username-txt">حسابي</span>
+                </div>
+                <div class="menu-icon" onclick="openSideDrawer()">
+                    <svg class="svg-icon glow" viewBox="0 0 24 24"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
+                </div>
+            </div>
+        </header>
+
+        <div id="side-drawer">
+            <div class="drawer-header">
+                <span style="color: var(--accent-color); font-weight: bold;">القائمة الرئيسية</span>
+                <button class="drawer-close" onclick="closeSideDrawer()">✕</button>
+            </div>
+
+            <div class="drawer-profile-box">
+                <div id="profile-banner-bg" class="profile-banner-bg" style="background-color: #333;"></div>
+
+                <div class="drawer-avatar-container" onclick="document.getElementById('avatar-file-input').click()">
+                    <img id="drawer-avatar-img" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80" alt="الملف الشخصي">
+                    <div id="rank-badge-overlay" class="rank-badge-overlay">عضو</div>
+                    <input type="file" id="avatar-file-input" accept="image/*" onchange="updateProfilePicture(event)">
+                </div>
+                <div id="drawer-username-txt" class="drawer-username">اسم المستخدم</div>
+                <div id="drawer-user-rank-txt" class="drawer-user-rank-txt">رتبة: عضو</div>
+                
+                <div class="bio-box-wrapper">
+                    <textarea id="drawer-bio-input" class="drawer-bio" maxlength="150" placeholder="اكتب نبذة عنك..." oninput="updateBioCounter()"></textarea>
+                </div>
+                <div id="bio-counter" class="bio-counter">150 حرف متبقي</div>
+
+                <div id="admin-banner-setting-container" class="admin-banner-input-box" style="display: none;">
+                    <label>رابط صورة الخلفية (ثابتة أو GIF)</label>
+                    <input type="text" id="admin-banner-input" placeholder="ضع رابط الصورة هنا...">
+                </div>
+
+                <button id="save-profile-btn-elem" class="save-profile-btn" onclick="saveProfileChanges()">حفظ التعديلات</button>
+            </div>
+
+            <ul class="drawer-menu-list">
+                <li class="drawer-menu-item" onclick="switchTab('tab-home', this); closeSideDrawer();">
+                    <svg class="svg-icon glow" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+                    <span>الرئيسية</span>
+                </li>
+                <li class="drawer-menu-item" onclick="switchTab('tab-posts', this); closeSideDrawer();">
+                    <svg class="svg-icon glow" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+                    <span>منشوراتي</span>
+                </li>
+                <li class="drawer-menu-item" onclick="openSettingsModal(); closeSideDrawer();">
+                    <svg class="svg-icon glow" viewBox="0 0 24 24"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c-.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg>
+                    <span>الإعدادات العامة</span>
+                </li>
+                <li id="drawer-members-link" class="drawer-menu-item" style="display: none;" onclick="openMembersModal()">
+                    <svg class="svg-icon glow" viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5s-3 1.34-3 3 1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+                    <span>الأعضاء</span>
+                </li>
+                <li id="drawer-admin-chat-link" class="drawer-menu-item" style="display: none;" onclick="switchTab('tab-admin-chat', this); closeSideDrawer();">
+                    <svg class="svg-icon glow" viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z"/></svg>
+                    <span>دردشة الإدارة</span>
+                </li>
+                <li class="drawer-menu-item" onclick="logoutUser()" style="color: #ff4d4d;">
+                    <svg class="svg-icon" style="fill: #ff4d4d;" viewBox="0 0 24 24"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg>
+                    <span>تسجيل الخروج</span>
+                </li>
+            </ul>
+
+            <div class="admin-section-box">
+                <div class="owners-glowing-box">
+                    <div class="owners-label-title">المالكين</div>
+                    <div class="owner-name-item">سجاد أحمد الأسدي</div>
+                    <div class="owner-name-item">بلقيس كاطع الطائي</div>
+                    <div>
+                        <a href="https://www.instagram.com/sudf.1?igsh=d2RnMzY5eHlpMTRi" target="_blank" class="instagram-badge-link">
+                            <svg class="svg-icon" style="width: 14px; height: 14px;" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                            <span>منصّة سُدف</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="members-modal">
+            <div class="members-card">
+                <h3>إدارة أعضاء المنصة وتعديل الرتب</h3>
+                <div id="members-list-container" class="members-list-container"></div>
+                <button class="close-modal-btn" onclick="closeMembersModal()">إغلاق</button>
+            </div>
+        </div>
+
+        <div id="tab-home" class="tab-content active-tab">
+            <div class="section-banner">
+                <div class="banner-icon">
+                    <svg class="svg-icon glow" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+                </div>
+                <div class="banner-text">
+                    <h3>أهلاً بك في واحة سُدُف</h3>
+                    <p>تابع أحدث المقالات والنصوص الأدبية المنشورة</p>
+                </div>
+            </div>
+
+            <div class="competition-card">
+                <div class="competition-info" style="padding: 20px;">
+                    <h4 style="color: var(--accent-color); margin-bottom: 8px;">مرحباً بك في ملتقى الأدب والفكر</h4>
+                    <p>استمتع بتصفح المنشورات والفعاليات، وشاركنا إبداعاتك ونصوصك الفصيحة.</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="tab-admin-chat">
+            <div class="chat-screen-header">
+                <button class="chat-back-btn" onclick="switchTab('tab-home', document.querySelector('.bottom-nav .nav-item'))" title="الرجوع">
+                    ←
+                </button>
+                <div class="chat-screen-header-info">
+                    <h4>دردشة المشرفين الخاصة</h4>
+                    <span>محادثة إدارية مشفرة وفورية</span>
+                </div>
+            </div>
+            
+            <div id="chat-messages-box" class="chat-messages-box">
+                <div class="chat-msg-card">
+                    <img class="chat-msg-avatar" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80" alt="النظام">
+                    <div class="chat-msg-body">
+                        <div class="chat-msg-user-header">
+                            <span class="chat-msg-username">النظام</span>
+                            <span class="chat-msg-rank-tag">إدارة</span>
+                        </div>
+                        <div class="chat-msg-text">أهلاً بك في غرفة التنسيق السرية الخاصة بإدارة المنصة. يمكنك استخدام السهم بالأعلى للعودة متى شئت.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chat-input-bar">
+                <input type="text" id="chat-msg-input" placeholder="اكتب رسالتك التنسيقية هنا...">
+                <button onclick="sendAdminMessage()">إرسال</button>
+            </div>
+        </div>
+
+        <div id="tab-posts" class="tab-content">
+            <div class="section-banner">
+                <div class="banner-icon">
+                    <svg class="svg-icon glow" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+                </div>
+                <div class="banner-text">
+                    <h3>منشوراتي ومقالاتي</h3>
+                    <p>إدارة نصوصك ومقالاتك المنشورة في الملتقى</p>
+                </div>
+            </div>
+
+            <button class="create-post-trigger-btn" onclick="togglePostCreationCard()">
+                <svg class="svg-icon" style="width: 20px; height: 20px; fill: #121212;" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+                إنشاء نص
+            </button>
+
+            <div id="post-creation-card" class="post-creation-card">
+                <textarea id="new-post-text" placeholder="اكتب نصك الأدبي أو مقالك الفصيح هنا..."></textarea>
+                <div>
+                    <label class="post-image-picker-label" onclick="document.getElementById('post-img-file-input').click()">
+                        📁 اختيار صورة (تظهر فوق النص)
+                    </label>
+                    <input type="file" id="post-img-file-input" accept="image/*" style="display:none;" onchange="previewPostImage(event)">
+                </div>
+                <img id="post-img-preview" class="post-image-preview" alt="معاينة الصورة">
+                <button class="auth-btn" onclick="publishNewPost()">نشر النص</button>
+            </div>
+
+            <div id="posts-feed-container">
+                <div class="empty-state-box" id="empty-posts-state">
+                    <p>لا توجد منشورات حتى الآن. اضغط على "إنشاء نص" لنشر نصك الأول!</p>
+                </div>
+            </div>
+        </div>
+
+        <nav class="bottom-nav">
+            <button class="nav-item active" onclick="switchTab('tab-home', this)">
+                <svg class="svg-icon nav-icon" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+                <span>الرئيسية</span>
+            </button>
+            <button class="nav-item" onclick="switchTab('tab-posts', this)">
+                <svg class="svg-icon nav-icon" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+                <span>المنشورات</span>
+            </button>
+            <button class="nav-center-btn" onclick="switchTab('tab-posts', this)">
+                <svg class="svg-icon" style="fill: #121212; width: 24px; height: 24px;" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+            </button>
+            <button class="nav-item" onclick="switchTab('tab-posts', this)">
+                <svg class="svg-icon nav-icon" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                <span>الفعاليات</span>
+            </button>
+            <button class="nav-item" onclick="openSideDrawer()">
+                <svg class="svg-icon nav-icon" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                <span>حسابي</span>
+            </button>
+        </nav>
+    </div>
+
+    <script>
+        function showCustomAlert(message) {
+            document.getElementById('custom-alert-msg').innerText = message;
+            document.getElementById('custom-alert-overlay').style.display = 'flex';
+        }
+        function closeCustomAlert() {
+            document.getElementById('custom-alert-overlay').style.display = 'none';
+        }
+
+        function openSettingsModal() {
+            document.getElementById('settings-modal').style.display = 'flex';
+        }
+        function closeSettingsModal() {
+            document.getElementById('settings-modal').style.display = 'none';
+        }
+
+        function changeWebsiteTheme(theme) {
+            if (theme === 'light') {
+                document.body.classList.add('light-mode');
+                localStorage.setItem('sudof_theme', 'light');
+            } else {
+                document.body.classList.remove('light-mode');
+                localStorage.setItem('sudof_theme', 'dark');
+            }
+        }
+
+        function changeFontSize(size) {
+            document.documentElement.style.setProperty('--font-size-base', size);
+            localStorage.setItem('sudof_fontsize', size);
+        }
+
+        function toggleNotifications(checkbox) {
+            localStorage.setItem('sudof_notifications', checkbox.checked);
+            showCustomAlert(checkbox.checked ? "تم تفعيل الإشعارات بنجاح" : "تم تعطيل الإشعارات");
+        }
+
+        const OWNER_EMAIL = "dgdhdd6jr@gmail.com";
+
+        let allMembers = JSON.parse(localStorage.getItem('sudof_members')) || [];
+        let currentUser = JSON.parse(localStorage.getItem('sudof_current_user')) || null;
+        let allPosts = JSON.parse(localStorage.getItem('sudof_posts')) || [];
+
+        const welcomeScreen = document.getElementById('welcome-screen');
+        const loginScreen = document.getElementById('login-screen');
+        const appMainScreen = document.getElementById('app-main-screen');
+        const startBtn = document.getElementById('start-btn');
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('sudof_theme');
+            if (savedTheme === 'light') {
+                document.body.classList.add('light-mode');
+                document.getElementById('theme-select').value = 'light';
+            }
+            const savedFont = localStorage.getItem('sudof_fontsize');
+            if (savedFont) {
+                document.documentElement.style.setProperty('--font-size-base', savedFont);
+                document.getElementById('font-size-select').value = savedFont;
+            }
+        });
+
+        startBtn.addEventListener('click', () => {
+            welcomeScreen.style.opacity = '0';
+            setTimeout(() => {
+                welcomeScreen.style.display = 'none';
+                if (currentUser) {
+                    applyUserDataToInterface();
+                    appMainScreen.style.display = 'flex';
+                } else {
+                    loginScreen.style.display = 'flex';
+                }
+            }, 300);
+        });
+
+        let generatedOtp = "";
+        const sendOtpBtn = document.getElementById('send-otp-btn');
+        const verifyOtpBtn = document.getElementById('verify-otp-btn');
+        const credentialsSection = document.getElementById('credentials-section');
+        const otpSection = document.getElementById('otp-section');
+        const formTitle = document.getElementById('form-title');
+
+        sendOtpBtn.addEventListener('click', () => {
+            const name = document.getElementById('fullname').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value.trim();
+
+            if (!name) { showCustomAlert("الرجاء إدخال الاسم الكامل."); return; }
+            if (!email || !email.includes('@')) { showCustomAlert("الرجاء إدخال بريد إلكتروني صحيح."); return; }
+            if (!password || password.length < 6) { showCustomAlert("كلمة المرور قصيرة (6 أحرف على الأقل)."); return; }
+
+            sendOtpBtn.innerText = "جاري إرسال الكود...";
+            sendOtpBtn.disabled = true;
+
+            generatedOtp = Math.floor(100000 + Math.random() * 900000).toString();
+
+            const templateParams = {
+                to_email: email,
+                passcode: generatedOtp,
+                from_name: "منصة سُدُف الأدبية",
+                reply_to: "support@sudof.com"
+            };
+
+            emailjs.send('service_e93vgvu', 'template_00x8eyh', templateParams)
+                .then(function(response) {
+                    showCustomAlert("تم إرسال كود التحقق إلى بريدك الإلكتروني بنجاح.");
+                    formTitle.innerText = "إدخال كود التحقق";
+                    credentialsSection.style.display = 'none';
+                    otpSection.style.display = 'block';
+                }, function(error) {
+                    sendOtpBtn.innerText = "التالي";
+                    sendOtpBtn.disabled = false;
+                    showCustomAlert("خطأ في الإرسال: تأكد من اتصال الإنترنت.");
+                });
+        });
+
+        verifyOtpBtn.addEventListener('click', () => {
+            const enteredOtp = document.getElementById('otp-input').value.trim();
+
+            if (enteredOtp === generatedOtp) {
+                const name = document.getElementById('fullname').value.trim();
+                const email = document.getElementById('email').value.trim();
+
+                let isOwnerAcc = (email.toLowerCase() === OWNER_EMAIL.toLowerCase());
+
+                let existing = allMembers.find(m => m.email.toLowerCase() === email.toLowerCase());
+                if (!existing) {
+                    currentUser = { 
+                        name, 
+                        email, 
+                        rank: isOwnerAcc ? 'مالك' : 'عضو', 
+                        isAdmin: isOwnerAcc, 
+                        avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80",
+                        bio: "أديب وكاتب في ملتقى سُدُف الفصيح.",
+                        banner: "" 
+                    };
+                    allMembers.push(currentUser);
+                } else {
+                    currentUser = existing;
+                    if (isOwnerAcc) {
+                        currentUser.rank = 'مالك';
+                        currentUser.isAdmin = true;
+                    } else if (!currentUser.rank) {
+                        currentUser.rank = 'عضو';
+                    }
+                    currentUser.name = name;
+                    let idx = allMembers.findIndex(m => m.email.toLowerCase() === email.toLowerCase());
+                    if(idx !== -1) allMembers[idx] = currentUser;
+                }
+
+                localStorage.setItem('sudof_members', JSON.stringify(allMembers));
+                localStorage.setItem('sudof_current_user', JSON.stringify(currentUser));
+
+                applyUserDataToInterface();
+
+                showCustomAlert("تم التحقق بنجاح! أهلاً بك في منصة سُدُف.");
+                loginScreen.style.display = 'none';
+                appMainScreen.style.display = 'flex';
+            } else {
+                showCustomAlert("رمز التحقق غير صحيح.");
+            }
+        });
+
+        function applyUserDataToInterface() {
+            if (currentUser) {
+                if (currentUser.email.toLowerCase() === OWNER_EMAIL.toLowerCase()) {
+                    currentUser.rank = 'مالك';
+                    currentUser.isAdmin = true;
+                }
+
+                document.getElementById('header-username-txtinnerText') = "";
+                document.getElementById('header-username-txt').textContent = currentUser.name;
+                document.getElementById('drawer-username-txt').textContent = currentUser.name;
+                document.getElementById('drawer-user-rank-txt').textContent = "الرتبة: " + currentUser.rank;
+                document.getElementById('rank-badge-overlay').textContent = currentUser.rank;
+
+                if(currentUser.avatar) {
+                    document.getElementById('header-avatar-img').src = currentUser.avatar;
+                    document.getElementById('drawer-avatar-img').src = currentUser.avatar;
+                }
+                if(currentUser.bio) {
+                    document.getElementById('drawer-bio-input').value = currentUser.bio;
+                }
+                
+                const bannerContainer = document.getElementById('admin-banner-setting-container');
+                const bannerBg = document.getElementById('profile-banner-bg');
+                
+                if (currentUser.rank === 'مشرف' || currentUser.rank === 'مالك' || currentUser.isAdmin) {
+                    bannerContainer.style.display = 'block';
+                    if(currentUser.banner) {
+                        document.getElementById('admin-banner-input').value = currentUser.banner;
+                        bannerBg.style.backgroundImage = `url('${currentUser.banner}')`;
+                        bannerBg.style.backgroundColor = 'transparent';
+                    } else {
+                        bannerBg.style.backgroundImage = 'none';
+                        bannerBg.style.backgroundColor = '#333';
+                    }
+                } else {
+                    bannerContainer.style.display = 'none';
+                    bannerBg.style.backgroundImage = 'none';
+                    bannerBg.style.backgroundColor = '#333';
+                }
+
+                updateBioCounter();
+                checkAdminPrivileges();
+                renderPostsFeed();
+            }
+        }
+
+        function updateBioCounter() {
+            const bioInput = document.getElementById('drawer-bio-input');
+            const counterTxt = document.getElementById('bio-counter');
+            const remaining = 150 - bioInput.value.length;
+            counterTxt.textContent = remaining + " حرف متبقي";
+        }
+
+        let tempSelectedAvatar = null;
+        function updateProfilePicture(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    tempSelectedAvatar = e.target.result;
+                    document.getElementById('header-avatar-img').src = tempSelectedAvatar;
+                    document.getElementById('drawer-avatar-img').src = tempSelectedAvatar;
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function saveProfileChanges() {
+            if (!currentUser) return;
+            
+            const newBio = document.getElementById('drawer-bio-input').value;
+            currentUser.bio = newBio;
+            if (tempSelectedAvatar) {
+                currentUser.avatar = tempSelectedAvatar;
+            }
+
+            if (currentUser.rank === 'مشرف' || currentUser.rank === 'مالك' || currentUser.isAdmin) {
+                const bannerInputVal = document.getElementById('admin-banner-input').value.trim();
+                currentUser.banner = bannerInputVal;
+                const bannerBg = document.getElementById('profile-banner-bg');
+                if(bannerInputVal) {
+                    bannerBg.style.backgroundImage = `url('${bannerInputVal}')`;
+                } else {
+                    bannerBg.style.backgroundImage = 'none';
+                }
+            }
+
+            let index = allMembers.findIndex(m => m.email.toLowerCase() === currentUser.email.toLowerCase());
+            if (index !== -1) {
+                allMembers[index] = currentUser;
+            }
+
+            localStorage.setItem('sudof_members', JSON.stringify(allMembers));
+            localStorage.setItem('sudof_current_user', JSON.stringify(currentUser));
+
+            const saveBtn = document.getElementById('save-profile-btn-elem');
+            const originalText = saveBtn.textContent;
+            saveBtn.textContent = "تم الحفظ ✓";
+            saveBtn.style.background = "#4caf50";
+            saveBtn.style.color = "#fff";
+
+            setTimeout(() => {
+                saveBtn.textContent = originalText;
+                saveBtn.style.background = "var(--accent-color)";
+                saveBtn.style.color = "#121212";
+            }, 2000);
+        }
+
+        function switchTab(tabId, element) {
+            const tabs = document.querySelectorAll('.tab-content');
+            tabs.forEach(t => {
+                t.style.display = 'none';
+                t.classList.remove('active-tab');
+            });
+            const chatTab = document.getElementById('tab-admin-chat');
+            chatTab.style.display = 'none';
+            chatTab.classList.remove('active-tab');
+
+            if (tabId === 'tab-admin-chat') {
+                chatTab.style.display = 'flex';
+                chatTab.classList.add('active-tab');
+            } else {
+                const targetTab = document.getElementById(tabId);
+                targetTab.style.display = 'block';
+                targetTab.classList.add('active-tab');
+            }
+
+            if(element && element.classList.contains('nav-item')) {
+                const navItems = document.querySelectorAll('.bottom-nav .nav-item');
+                navItems.forEach(item => item.classList.remove('active'));
+                element.classList.add('active');
+            }
+            window.scrollTo(0, 0);
+        }
+
+        function openSideDrawer() {
+            document.getElementById('side-drawer').classList.add('open');
+        }
+        function closeSideDrawer() {
+            document.getElementById('side-drawer').classList.remove('open');
+        }
+
+        function checkAdminPrivileges() {
+            if (currentUser && (currentUser.isAdmin || currentUser.rank === 'مشرف' || currentUser.email.toLowerCase() === OWNER_EMAIL.toLowerCase())) {
+                document.getElementById('drawer-members-link').style.display = 'flex';
+                document.getElementById('drawer-admin-chat-link').style.display = 'flex';
+            } else {
+                document.getElementById('drawer-members-link').style.display = 'none';
+                document.getElementById('drawer-admin-chat-link').style.display = 'none';
+            }
+        }
+
+        function openMembersModal() {
+            closeSideDrawer();
+            renderMembersList();
+            document.getElementById('members-modal').style.display = 'flex';
+        }
+        function closeMembersModal() {
+            document.getElementById('members-modal').style.display = 'none';
+        }
+
+        function renderMembersList() {
+            const container = document.getElementById('members-list-container');
+            container.innerHTML = "";
+            
+            allMembers = JSON.parse(localStorage.getItem('sudof_members')) || [];
+
+            allMembers.forEach((member, index) => {
+                let isOwnerAcc = (member.email.toLowerCase() === OWNER_EMAIL.toLowerCase());
+                if(isOwnerAcc) member.rank = 'مالك';
+
+                const rowDiv = document.createElement('div');
+                rowDiv.className = 'member-row';
+
+                const infoDiv = document.createElement('div');
+                infoDiv.className = 'member-info-text';
+
+                const nameSpan = document.createElement('span');
+                nameSpan.className = 'member-name-txt';
+                nameSpan.textContent = member.name;
+
+                const emailSpan = document.createElement('span');
+                emailSpan.className = 'member-email-txt';
+                emailSpan.textContent = member.email;
+
+                const rankSpan = document.createElement('span');
+                rankSpan.className = 'member-current-rank';
+                rankSpan.textContent = "الرتبة الحالية: " + member.rank;
+
+                infoDiv.appendChild(nameSpan);
+                infoDiv.appendChild(emailSpan);
+                infoDiv.appendChild(rankSpan);
+                rowDiv.appendChild(infoDiv);
+
+                if (isOwnerAcc) {
+                    const ownerSpan = document.createElement('span');
+                    ownerSpan.style.color = "var(--accent-color)";
+                    ownerSpan.style.fontSize = "11px";
+                    ownerSpan.style.fontWeight = "bold";
+                    ownerSpan.textContent = "المالك";
+                    rowDiv.appendChild(ownerSpan);
+                } else {
+                    const actionsDiv = document.createElement('div');
+                    actionsDiv.className = 'rank-actions';
+
+                    ['عضو', 'عضو مميز', 'مشرف'].forEach(r => {
+                        const btn = document.createElement('button');
+                        btn.className = `rank-btn ${member.rank === r ? 'active-rank' : ''}`;
+                        btn.textContent = r === 'عضو مميز' ? 'مميز' : r;
+                        btn.onclick = () => changeUserRank(index, r);
+                        actionsDiv.appendChild(btn);
+                    });
+                    rowDiv.appendChild(actionsDiv);
+                }
+
+                container.appendChild(rowDiv);
+            });
+        }
+
+        function changeUserRank(index, newRank) {
+            allMembers[index].rank = newRank;
+            allMembers[index].isAdmin = (newRank === 'مشرف' || newRank === 'مالك');
+
+            localStorage.setItem('sudof_members', JSON.stringify(allMembers));
+
+            if (allMembers[index].email.toLowerCase() === currentUser.email.toLowerCase()) {
+                currentUser = allMembers[index];
+                localStorage.setItem('sudof_current_user', JSON.stringify(currentUser));
+                applyUserDataToInterface();
+            }
+
+            renderMembersList();
+            showCustomAlert(`تم تغيير رتبة العضو إلى (${newRank}) بنجاح!`);
+        }
+
+        function togglePostCreationCard() {
+            const card = document.getElementById('post-creation-card');
+            card.style.display = (card.style.display === 'block') ? 'none' : 'block';
+        }
+
+        let tempPostImage = "";
+        function previewPostImage(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    tempPostImage = e.target.result;
+                    const preview = document.getElementById('post-img-preview');
+                    preview.src = tempPostImage;
+                    preview.style.display = 'block';
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function publishNewPost() {
+            const textContent = document.getElementById('new-post-text').value.trim();
+            if (!textContent && !tempPostImage) {
+                showCustomAlert("الرجاء كتابة نص أو إرفاق صورة للنشر.");
+                return;
+            }
+
+            const newPost = {
+                id: Date.now(),
+                authorName: currentUser.name,
+                authorRank: currentUser.rank,
+                authorAvatar: currentUser.avatar || "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80",
+                text: textContent,
+                image: tempPostImage
+            };
+
+            allPosts.unshift(newPost);
+            localStorage.setItem('sudof_posts', JSON.stringify(allPosts));
+
+            document.getElementById('new-post-text').value = "";
+            document.getElementById('post-img-preview').style.display = 'none';
+            tempPostImage = "";
+            document.getElementById('post-creation-card').style.display = 'none';
+
+            renderPostsFeed();
+            showCustomAlert("تم نشر النص بنجاح!");
+        }
+
+        function renderPostsFeed() {
+            const container = document.getElementById('posts-feed-container');
+            allPosts = JSON.parse(localStorage.getItem('sudof_posts')) || [];
+
+            if (allPosts.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state-box" id="empty-posts-state">
+                        <p>لا توجد منشورات حتى الآن. اضغط على "إنشاء نص" لنشر نصك الأول!</p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = "";
+            allPosts.forEach(post => {
+                const card = document.createElement('div');
+                card.className = 'ig-post-card';
+
+                const header = document.createElement('div');
+                header.className = 'ig-post-header';
+
+                const avatar = document.createElement('img');
+                avatar.className = 'ig-post-avatar';
+                avatar.src = post.authorAvatar;
+                avatar.alt = post.authorName;
+
+                const userInfo = document.createElement('div');
+                userInfo.className = 'ig-post-user-info';
+
+                const authorSpan = document.createElement('span');
+                authorSpan.className = 'ig-post-author';
+                authorSpan.textContent = post.authorName;
+
+                const rankSpan = document.createElement('span');
+                rankSpan.className = 'ig-post-rank';
+                rankSpan.textContent = post.authorRank;
+
+                userInfo.appendChild(authorSpan);
+                userInfo.appendChild(rankSpan);
+                header.appendChild(avatar);
+                header.appendChild(userInfo);
+                card.appendChild(header);
+
+                if (post.image) {
+                    const imgContainer = document.createElement('div');
+                    imgContainer.className = 'ig-post-image-container';
+                    const postImg = document.createElement('img');
+                    postImg.src = post.image;
+                    postImg.alt = "صورة المنشور";
+                    imgContainer.appendChild(postImg);
+                    card.appendChild(imgContainer);
+                }
+
+                const textBody = document.createElement('div');
+                textBody.className = 'ig-post-text-body';
+                textBody.textContent = post.text;
+                card.appendChild(textBody);
+
+                container.appendChild(card);
+            });
+        }
+
+        function sendAdminMessage() {
+            const input = document.getElementById('chat-msg-input');
+            const txt = input.value.trim();
+            if(!txt) return;
+
+            const box = document.getElementById('chat-messages-box');
+            let userAvatar = currentUser.avatar || "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80";
+
+            const msgCard = document.createElement('div');
+            msgCard.className = 'chat-msg-card';
+
+            const avatarImg = document.createElement('img');
+            avatarImg.className = 'chat-msg-avatar';
+            avatarImg.src = userAvatar;
+
+            const bodyDiv = document.createElement('div');
+            bodyDiv.className = 'chat-msg-body';
+
+            const userHeader = document.createElement('div');
+            userHeader.className = 'chat-msg-user-header';
+
+            const usernameSpan = document.createElement('span');
+            usernameSpan.className = 'chat-msg-username';
+            usernameSpan.textContent = currentUser.name;
+
+            const rankTag = document.createElement('span');
+            rankTag.className = 'chat-msg-rank-tag';
+            rankTag.textContent = currentUser.rank;
+
+            userHeader.appendChild(usernameSpan);
+            userHeader.appendChild(rankTag);
+
+            const textDiv = document.createElement('div');
+            textDiv.className = 'chat-msg-text';
+            textDiv.textContent = txt;
+
+            bodyDiv.appendChild(userHeader);
+            bodyDiv.appendChild(textDiv);
+            msgCard.appendChild(avatarImg);
+            msgCard.appendChild(bodyDiv);
+
+            box.appendChild(msgCard);
+            input.value = "";
+            box.scrollTop = box.scrollHeight;
+        }
+
+        function logoutUser() {
+            // حل مشكلة حذف ملفات الحساب كلياً عند الخروج، مع إبقاء الجلسة الحالية مسجلة الخروج بلطف
+            localStorage.removeItem('sudof_current_user');
+            location.reload();
+        }
+    </script>
+</body>
+</html>
