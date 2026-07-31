@@ -1,0 +1,229 @@
+/* تنسيقات عامة لمنصة سُدف */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #121212;
+  color: #e0e0e0;
+  font-family: Tahoma, sans-serif;
+  direction: rtl;
+}
+
+.app-layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* القائمة الجانبية */
+.sidebar {
+  width: 280px;
+  background-color: #181818;
+  border-left: 1px solid #2a2a2a;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.sidebar-header h2 {
+  color: #f1c40f;
+  font-size: 18px;
+}
+
+/* صندوق الخلفية والصورة الشخصية */
+.profile-preview-box {
+  background: #222;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #333;
+}
+
+.profile-cover-background {
+  height: 100px;
+  background-color: #333;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.profile-avatar-container {
+  transform: translateY(50%);
+}
+
+.avatar-circle {
+  width: 60px;
+  height: 60px;
+  background-color: #444;
+  border-radius: 50%;
+  border: 3px solid #181818;
+  position: relative;
+}
+
+.avatar-badge {
+  position: absolute;
+  bottom: -5px;
+  right: -10px;
+  background: #f1c40f;
+  color: #000;
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+.admin-cover-upload {
+  padding: 35px 15px 15px 15px;
+  text-align: center;
+}
+
+.upload-cover-btn {
+  display: inline-block;
+  background: linear-gradient(135deg, #f1c40f, #d4ac0d);
+  color: #111;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: 12px;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.upload-cover-btn:hover {
+  opacity: 0.9;
+}
+
+/* روابط القائمة */
+.nav-links {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.nav-item {
+  color: #ccc;
+  text-decoration: none;
+  padding: 10px;
+  border-radius: 8px;
+  transition: background 0.2s;
+  font-size: 14px;
+}
+
+.nav-item:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: #f1c40f;
+}
+
+.nav-item.logout {
+  color: #ff4d4d;
+}
+
+/* قسم المالكين */
+.owners-section {
+  background: #1e1e1e;
+  border: 1px solid #333;
+  padding: 12px;
+  border-radius: 8px;
+  margin-top: auto;
+  text-align: center;
+}
+
+.owners-section h3 {
+  color: #f1c40f;
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+
+.owners-section p {
+  font-size: 12px;
+  color: #bbb;
+  margin: 3px 0;
+}
+
+/* المحتوى الرئيسي والمنشورات */
+.main-content {
+  flex: 1;
+  padding: 20px;
+  max-width: 650px;
+  margin: 0 auto;
+}
+
+.top-bar {
+  margin-bottom: 20px;
+  border-bottom: 1px solid #2a2a2a;
+  padding-bottom: 10px;
+}
+
+.top-bar h1 {
+  color: #f1c40f;
+  font-size: 22px;
+}
+
+.post-card {
+  background: #1e1e1e;
+  border: 1px solid #2d2d2d;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 20px;
+}
+
+.post-author-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  font-size: 13px;
+  color: #aaa;
+}
+
+.role-tag {
+  background: rgba(241, 196, 15, 0.15);
+  color: #f1c40f;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+}
+
+.post-text {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #fff;
+  margin-bottom: 15px;
+}
+
+/* أزرار التفاعل (إعجاب، تعليق، إعادة نشر) */
+.post-footer {
+  border-top: 1px solid #2a2a2a;
+  padding-top: 12px;
+}
+
+.interaction-buttons {
+  display: flex;
+  gap: 25px;
+  align-items: center;
+}
+
+.action-btn {
+  background: transparent;
+  border: none;
+  color: #aaa;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  transition: color 0.2s ease;
+}
+
+.action-btn:hover {
+  color: #f1c40f;
+}
+
+.action-btn.liked {
+  color: #ff3b30;
+  }
