@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سُدُف - ملتقى الأدب والفكر</title>
+    <!-- مكتبة EmailJS لإرسال كود التحقق 6 أرقام -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function() {
+            emailjs.init("ykVFDNyDtgVlwD0Uq");
+        })();
+    </script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #121212;
+            margin: 0;
+            color: #ffffff;
+            direction: rtl;
+        }
+
+        /* 1. شاشة الترحيب الأولى */
+        #welcome-screen {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            width: 100%;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background: #121212;
+            z-index: 100;
+            transition: opacity 0.5s ease;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .welcome-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 320px;
+            width: 100%;
+        }
+        .feather-icon {
+            font-size: 42px;
+            margin-bottom: 10px;
+        }
+        .welcome-title {
+            font-size: 34px;
+            font-weight: bold;
+            color: #d4af37;
+            margin-bottom: 8px;
+            letter-spacing: 1px;
+        }
+        .welcome-subtitle {
+            font-size: 14px;
+            color: #aaa;
+            margin-bottom: 30px;
+        }
+        .welcome-btn-outline {
+            background: transparent;
+            color: #d4af37;
+            border: 2px solid #d4af37;
+            border-radius: 10px;
+            padding: 12px 20px;
+            font-size: 14px;
+            width: 100%;
+            margin-bottom: 12px;
+            box-sizing: border-box;
+        }
+        .welcome-btn-solid {
+            background: linear-gradient(135deg, #d4af37, #aa8c2c);
+            color: #121212;
+            border: none;
+            border-radius: 10px;
+            padding: 13px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            width: 100%;
+            cursor: pointer;
+            box-sizing: border-box;
+        }
+        .welcome-footer {
+            margin-top: 35px;
+            font-size: 12px;
+            color: #777;
+        }
+
+        /* 2. شاشة تسجيل الدخول والتحقق */
+        #login-screen {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100vh;
+            background: #121212;
+            padding: 20px;
+            box-sizing: border-box;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 90;
+        }
+        .login-container {
+            background: #1e1e1e;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+            border: 1px solid #333;
+            width: 100%;
+            max-width: 360px;
+            text-align: center;
+            color: #ffffff;
+            box-sizing: border-box;
+        }
+        .login-container h2 {
+            margin-bottom: 15px;
+            color: #d4af37;
+            font-size: 20px;
+        }
+        .input-group {
+            margin-bottom: 12px;
+            text-align: right;
+        }
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #ccc;
+            font-size: 13px;
+        }
+        .input-group input {
+            width: 100%;
+            padding: 10px;
+            background: #2c2c2c;
+            border: 1px solid #444;
+            color: #fff;
+            border-radius: 6px;
+            font-size: 14px;
+            box-sizing: border-box;
+            text-align: right;
+        }
+        .auth-btn {
+            background: linear-gradient(135deg, #d4af37, #aa8c2c);
+            color: #121212;
+            border: none;
+            border-radius: 6px;
+            padding: 11px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 8px;
+            box-sizing: border-box;
+        }
+        
+        /* قسم إدخال الـ 6 أرقام (مخفي مبدئياً) */
+        #otp-section {
+            display: none;
+        }
+
+        /* 3. واجهة التطبيق الأساسية (الرئيسية) */
+        #app-main-screen {
+            display: none;
+            flex-direction: column;
+            min-height: 100vh;
+            padding-bottom: 70px;
+            background: #121212;
+        }
+        .app-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            border-bottom: 1px solid #222;
+        }
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .mini-feather {
+            font-size: 24px;
+            background: #1e1e1e;
+            padding: 8px;
+            border-radius: 8px;
+            border: 1px solid #d4af37;
+        }
+        .logo-text h1 {
+            margin: 0;
+            font-size: 20px;
+            color: #d4af37;
+        }
+        .logo-text span {
+            font-size: 11px;
+            color: #aaa;
+        }
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .login-badge-btn {
+            background: transparent;
+            border: 1px solid #d4af37;
+            color: #d4af37;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+        }
+        .menu-icon {
+            font-size: 22px;
+            color: #d4af37;
+        }
+        .content-body {
+            padding: 15px;
+            max-width: 600px;
+            margin: 0 auto;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .section-banner {
+            background: linear-gradient(135deg, rgba(212,175,55,0.15), rgba(30,30,30,0.6));
+            border: 1px solid #d4af37;
+            border-radius: 12px;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        .banner-icon {
+            font-size: 32px;
+            background: #d4af37;
+            padding: 10px 14px;
+            border-radius: 10px;
+        }
+        .banner-text h3 {
+            margin: 0 0 5px 0;
+            color: #d4af37;
+            font-size: 18px;
+        }
+        .banner-text p {
+            margin: 0;
+            color: #bbb;
+            font-size: 12px;
+        }
+        .competition-card {
+            background: #1a1a1a;
+            border-radius: 14px;
+            overflow: hidden;
+            border: 1px solid #333;
+            margin-bottom: 20px;
+        }
+        .competition-img-container {
+            position: relative;
+            height: 180px;
+            background: #2a2a2a;
+        }
+        .competition-img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.85;
+        }
+        .badge-tag {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: rgba(20, 20, 20, 0.85);
+            color: #d4af37;
+            border: 1px solid #d4af37;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+        }
+        .competition-info {
+            padding: 15px;
+        }
+        .competition-info h4 {
+            margin: 0 0 8px 0;
+            font-size: 18px;
+            color: #fff;
+        }
+        .competition-info p {
+            margin: 0;
+            color: #aaa;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: #161616;
+            border-top: 1px solid #282828;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            height: 60px;
+            z-index: 50;
+            box-sizing: border-box;
+        }
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #888;
+            font-size: 11px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            flex: 1;
+        }
+        .nav-item.active {
+            color: #d4af37;
+        }
+        .nav-icon {
+            font-size: 18px;
+            margin-bottom: 2px;
+        }
+        .nav-center-btn {
+            position: relative;
+            top: -15px;
+            background: linear-gradient(135deg, #d4af37, #aa8c2c);
+            color: #121212;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            box-shadow: 0 4px 10px rgba(212,175,55,0.4);
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 1. شاشة الترحيب الأولى -->
+    <div id="welcome-screen">
+        <div class="welcome-content">
+            <div class="feather-icon">🪶</div>
+            <div class="welcome-title">سُدُف</div>
+            <div class="welcome-subtitle">ملتقى الأدب والفكر العربي الفصيح</div>
+            <div class="welcome-btn-outline">أهلاً وسهلاً بكم في منصة سُدُف الأدبية</div>
+            <button id="start-btn" class="welcome-btn-solid">لنبدأ ←</button>
+            <div class="welcome-footer">منصة سُدُف — للشعر والنثر والنقد الأدبي</div>
+        </div>
+    </div>
+
+    <!-- 2. شاشة تسجيل الدخول (الاسم، الإيميل، كلمة المرور) -->
+    <div id="login-screen">
+        <div class="login-container">
+            <h2 id="form-title">تسجيل الدخول إلى سُدُف</h2>
+            
+            <!-- حقول الاسم، الإيميل، وكلمة المرور -->
+            <div id="credentials-section">
+                <div class="input-group">
+                    <label>الاسم الكامل</label>
+                    <input type="text" id="fullname" placeholder="أدخل اسمك الكريم">
+                </div>
+                <div class="input-group">
+                    <label>البريد الإلكتروني</label>
+                    <input type="email" id="email" placeholder="example@domain.com">
+                </div>
+                <div class="input-group">
+                    <label>كلمة المرور</label>
+                    <input type="password" id="password" placeholder="••••••••">
+                </div>
+                <button id="send-otp-btn" class="auth-btn">التالي</button>
+            </div>
+
+            <!-- قسم إدخال الـ 6 أرقام (يظهر بعد الضغط على التالي) -->
+            <div id="otp-section">
+                <p style="font-size: 13px; color: #d4af37; margin-bottom: 12px;">تم إرسال كود التحقق (6 أرقام) إلى بريدك الإلكتروني:</p>
+                <div class="input-group">
+                    <input type="text" id="otp-input" maxlength="6" placeholder="000000" style="letter-spacing: 5px; font-size: 18px; font-weight: bold; text-align: center;">
+                </div>
+                <button id="verify-otp-btn" class="auth-btn">التالي (الدخول للمنصة)</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 3. واجهة التطبيق الأساسية (الرئيسية) -->
+    <div id="app-main-screen">
+        <header class="app-header">
+            <div class="logo-area">
+                <div class="mini-feather">🪶</div>
+                <div class="logo-text">
+                    <h1>سُدُف</h1>
+                    <span>منصة الأدب العربي</span>
+                </div>
+            </div>
+            <div class="header-left">
+                <button class="login-badge-btn"><span>حسابي</span></button>
+                <div class="menu-icon">☰</div>
+            </div>
+        </header>
+
+        <div class="content-body">
+            <div class="section-banner">
+                <div class="banner-icon">🏆</div>
+                <div class="banner-text">
+                    <h3>المسابقات والأمسيات الأدبية</h3>
+                    <p>تنافس على الجوائز الشعرية وتصدر المشهد الأدبي</p>
+                </div>
+            </div>
+
+            <div class="competition-card">
+                <div class="competition-img-container">
+                    <img src="https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=600&q=80" alt="مسابقة الشعر">
+                    <div class="badge-tag">✨ مسابقة كبرى</div>
+                </div>
+                <div class="competition-info">
+                    <h4>مسابقة سُدُف الكبرى للشعر العمودي 2026</h4>
+                    <p>تعلن منصة سُدُف الأدبية عن إطلاق المسابقة السنوية الكبرى للشعر الفصيح بالأسطر الموزونة، شارك بأفضل قصائدك...</p>
+                </div>
+            </div>
+        </div>
+
+        <nav class="bottom-nav">
+            <button class="nav-item"><span class="nav-icon">🏠</span><span>الرئيسية</span></button>
+            <button class="nav-item active"><span class="nav-icon">🏆</span><span>المسابقات</span></button>
+            <button class="nav-center-btn">✎</button>
+            <button class="nav-item"><span class="nav-icon">📖</span><span>منشوراتي</span></button>
+            <button class="nav-item"><span class="nav-icon">👤</span><span>حسابي</span></button>
+        </nav>
+    </div>
+
+    <!-- المنطق البرمجي ونظام الـ OTP -->
+    <script>
+        const startBtn = document.getElementById('start-btn');
+        const welcomeScreen = document.getElementById('welcome-screen');
+        const loginScreen = document.getElementById('login-screen');
+        const appMainScreen = document.getElementById('app-main-screen');
+
+        startBtn.addEventListener('click', () => {
+            welcomeScreen.style.opacity = '0';
+            setTimeout(() => {
+                welcomeScreen.style.display = 'none';
+                loginScreen.style.display = 'flex';
+            }, 300);
+        });
+
+        let generatedOtp = "";
+        const sendOtpBtn = document.getElementById('send-otp-btn');
+        const verifyOtpBtn = document.getElementById('verify-otp-btn');
+        const credentialsSection = document.getElementById('credentials-section');
+        const otpSection = document.getElementById('otp-section');
+        const formTitle = document.getElementById('form-title');
+
+        // الخطوة 1: التحقق من تعبئة الحقول وإرسال الكود عبر EmailJS
+        sendOtpBtn.addEventListener('click', () => {
+            const name = document.getElementById('fullname').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value.trim();
+
+            if (!name) {
+                alert("الرجاء إدخال الاسم الكامل.");
+                return;
+            }
+            if (!email || !email.includes('@')) {
+                alert("الرجاء إدخال بريد إلكتروني صحيح.");
+                return;
+            }
+            if (!password || password.length < 6) {
+                alert("الرجاء إدخال كلمة مرور تتكون من 6 أحرف أو أرقام على الأقل.");
+                return;
+            }
+
+            sendOtpBtn.innerText = "جاري إرسال الكود...";
+            sendOtpBtn.disabled = true;
+
+            // توليد كود التحقق من 6 أرقام
+            generatedOtp = Math.floor(100000 + Math.random() * 900000).toString();
+
+            const templateParams = {
+                to_email: email,
+                passcode: generatedOtp,
+                from_name: "منصة سُدُف الأدبية",
+                reply_to: "support@sudof.com"
+            };
+
+            emailjs.send('service_gzvlc7p', 'template_00x8eyh', templateParams)
+                .then(() => {
+                    alert("تم إرسال كود التحقق إلى بريدك الإلكتروني بنجاح.");
+                    formTitle.innerText = "إدخال كود التحقق";
+                    credentialsSection.style.display = 'none';
+                    otpSection.style.display = 'block';
+                }, (error) => {
+                    sendOtpBtn.innerText = "التالي";
+                    sendOtpBtn.disabled = false;
+                    alert("حدث خطأ أثناء إرسال البريد. تأكد من اتصالك بالإنترنت.");
+                    console.log(error);
+                });
+        });
+
+        // الخطوة 2: التحقق من الكود والدخول للموقع
+        verifyOtpBtn.addEventListener('click', () => {
+            const enteredOtp = document.getElementById('otp-input').value.trim();
+
+            if (enteredOtp === generatedOtp) {
+                alert("تم التحقق بنجاح! أهلاً بك في منصة سُدُف.");
+                loginScreen.style.display = 'none';
+                appMainScreen.style.display = 'flex';
+            } else {
+                alert("رمز التحقق غير صحيح. يرجى التأكد من الأرقام المرسلة لبريدك.");
+            }
+        });
+    </script>
+</body>
+  </html>
